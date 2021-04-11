@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Case8 : Footer - 출제자 해설코드</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css" />
+    <style>
+        /*
+      ==================== html => MD 작업 시, 꼭! 확인해주세요. ====================
+      1. Markdown All in One : Print current document to HTML 실행. (VScode extension)
+      2. 생성된 README.html에서 body 태그 안에 있는것들을 복사
+      3. README_OOO.html 로 파일명 수정 (OOO => Case 이름)
+      4. ! 자동완성을 통해 기본 html 폼을 만들고, body태그 안에 <2>의 내용 붙여넣기
+      5. font / code style에 관련된 <link>세줄과 <style> 태그 안에 있는 내용 붙여넣기
+      6. 상단 <title> 태그 안에 <h2> 텍스트 삽입
+      7. <code> tag가 줄바꿈 될 때, class명으로 "code-inlineBlock" 넣어주기
+      8. <img>태그 경로 변경해주기
+      [ EXAMPLE ]
+      [ 변경 전 ] : 절대경로로 되어있음
+      <img
+          width="600px"
+          src="file:////Users/ming/Desktop/ui-component/case2_InfiniteScroll/example_image.gif"
+        />
+      [ 변경 후 ] : 상대경로로 수정
+      <img
+          width="600px"
+          src="./example_image.gif"
+        />
+      8. html 내에 <h3>실행 방법 및 의존성 모듈 설치</h3> 하위 내용 아래와 같이 수정
+      [ EXAMPLE ]
+      [ 변경 전 ] : p에 className 없음
+        <p>
+          <strong>q1</strong>
+          경로
+          <code>./question/q1_js</code>
+          index.html 열기
+        </p>
+      [ 변경 후 ] : p에 className 있음
+        <p>
+          <strong>q1</strong>
+          경로
+          <code>./question/q1_js</code>
+          <p class="excute-text">index.html 열기</p>
+        </p>
+
+
+      [ 변경 전 ] : p태그와 pre태그가 div로 감싸져있지 않음
+        <p>
+          <strong>q4</strong>
+          경로
+          <code>./question/q4_react.js</code>
+        </p>
+
+        <p>터미널</p>
+        <pre><code class="language-bash"><div>  $ npm install
+        $ npm start
+      </div></code></pre>
+
+      [ 변경 후 ] : p태그와 pre태그가 div.code-wrap 으로 감싸져있음
+        <p>
+          <strong>q4</strong>
+          경로
+          <code>./question/q4_react.js</code>
+        </p>
+
+        <div class="code-wrap">
+        <p>터미널</p>
+        <pre>
+          <code class="language-bash"><div>  $ npm install
+      $ npm start
+    </div></code></pre>
+    </div>
+    */
+
+        html {
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: "Noto Sans KR", sans-serif;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        ul,
+        ol,
+        li,
+        dl,
+        dt,
+        dd,
+        p,
+        table {
+            margin: 0;
+            padding: 0;
+            color: #494949;
+            letter-spacing: -0.025rem;
+            box-sizing: border-box;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-weight: 600;
+        }
+
+        a {
+            text-decoration: inherit;
+            display: block;
+            color: #5e9cff;
+            text-decoration: underline;
+        }
+
+        a::before {
+            content: '📎';
+        }
+
+        a img {
+            border: none;
+        }
+
+        img {
+            max-width: 100%;
+            vertical-align: middle;
+        }
+
+        ul li {
+            list-style: none;
+        }
+
+        p {
+            line-height: 1.8;
+        }
+
+        /* STYLE */
+
+        body {
+            padding: 0;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        h2 {
+            padding: 50px 0;
+            color: #ffffff;
+            font-size: 2rem;
+            text-align: center;
+            background: linear-gradient(45deg, #ed234b, #ff6c89, #ff6fb7);
+        }
+
+        h2::before {
+            content: "#";
+            display: inline-block;
+            margin-right: 5px;
+            color: #ff9db0;
+            font-weight: 300;
+            font-size: 2.2rem;
+        }
+
+        h3 {
+            position: relative;
+            margin: 30px 20px;
+            padding-bottom: 15px;
+            color: #303030;
+            font-size: 1.6rem;
+            border-bottom: 1px solid #ededed;
+        }
+
+        blockquote {
+            margin: 20px;
+            padding: 20px;
+            background: #f2f2f2;
+        }
+
+        strong {
+            display: block;
+            margin-top: 10px;
+        }
+
+        .code-wrap {
+            position: relative;
+            background: #2f303b;
+            margin: 15px 0 0 0;
+        }
+
+        .code-wrap>p {
+            position: absolute;
+            left: 0;
+            top: 0;
+            padding: 2px 15px;
+            font-size: 0.7rem;
+            color: #ffffff;
+            text-align: center;
+            background: #61c8cc;
+        }
+
+        code {
+            background: #ededed;
+        }
+
+        .language-html>div,
+        .language-css>div,
+        .language-scss>div,
+        .language-js>div {
+            color: #fff;
+            padding: 30px 20px;
+            background: #2f303b;
+        }
+
+        code.language-bash div {
+            margin-top: -20px;
+            padding: 30px 20px;
+            font-size: 1rem;
+            color: #ffffff;
+            background: #2f303b;
+            box-sizing: border-box;
+        }
+
+        code::after {
+            content: "";
+            display: block;
+        }
+
+        code.code-inlineBlock::after {
+            content: "";
+            display: inline-block;
+        }
+
+        .excute-text {
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: #ed234b;
+        }
+
+        /* 좌, 우 여백 */
+
+        ol,
+        ul {
+            margin: 20px;
+            padding: 20px;
+            background: #f2f2f2;
+        }
+
+        ol li {
+            margin-left: 15px;
+        }
+
+        li {
+            font-size: 0.85rem;
+        }
+
+        p {
+            font-size: 0.85rem;
+        }
+
+        h4,
+        h5,
+        h6,
+        p,
+        img,
+        pre {
+            padding: 0 20px;
+        }
+
+        h4 {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+  <h2 id="case8--footer---출제자-해설코드">Case8 : Footer - 출제자 해설코드</h2>
+<pre><code class="language-html"><div><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;en&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;UTF-8&quot;</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;viewport&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;width=device-width, initial-scale=1.0&quot;</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>02-footer (solution)<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">link</span>
+      <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&amp;display=swap&quot;</span>
+      <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span>
+    /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;reset.css&quot;</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;solution.css&quot;</span> /&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">footer</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;footer&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;footer-left-container&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;footer-logo&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;./images/logo.png&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;logo fastcampus&quot;</span> /&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;footer-company-info&quot;</span>&gt;</span>
+          패스트캠퍼스(주)<span class="hljs-tag">&lt;<span class="hljs-name">br</span> /&gt;</span>
+          사업자번호 : 810-86-00658<span class="hljs-tag">&lt;<span class="hljs-name">br</span> /&gt;</span>
+          사무실 : 서울시 강남구 강남대로 364 미왕빌딩 15층
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+      <span class="hljs-comment">&lt;!-- 브라우저 사이즈에 따라 레이아웃 위치를 변경하기 위해 --&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;footer-right-container&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">nav</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;footer-menu-container&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;footer-menu&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;footer-menu-item&quot;</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;#&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;footer-menu-item-link&quot;</span>&gt;</span>회사소개<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;footer-menu-item&quot;</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;#&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;footer-menu-item-link&quot;</span>&gt;</span>이용약관<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;footer-menu-item&quot;</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;#&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;footer-menu-item-link&quot;</span>&gt;</span>개인정보처리방침<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;footer-menu-item&quot;</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;#&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;footer-menu-item-link&quot;</span>&gt;</span>취소/환불 정책<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;footer-menu-item&quot;</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;#&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;footer-menu-item-link&quot;</span>&gt;</span>자주 묻는 질문<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;footer-menu-item&quot;</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;#&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;footer-menu-item-link&quot;</span>&gt;</span>공지사항<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">nav</span>&gt;</span>
+
+        <span class="hljs-tag">&lt;<span class="hljs-name">nav</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;footer-channel-container&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;footer-channel&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;footer-channel-item&quot;</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;footer-channel-item-link&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;#&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">img</span>
+                  <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;footer-chnnel-item-icon&quot;</span>
+                  <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;./images/icon-facebook.png&quot;</span>
+                  <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;facebook icon&quot;</span>
+                /&gt;</span>
+              <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;footer-channel-item&quot;</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;footer-channel-item-link&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;#&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">img</span>
+                  <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;footer-chnnel-item-icon&quot;</span>
+                  <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;./images/icon-instagram.png&quot;</span>
+                  <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;instagram icon&quot;</span>
+                /&gt;</span>
+              <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;footer-channel-item&quot;</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;footer-channel-item-link&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;#&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">img</span>
+                  <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;footer-chnnel-item-icon&quot;</span>
+                  <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;./images/icon-youtube.png&quot;</span>
+                  <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;youtube icon&quot;</span>
+                /&gt;</span>
+              <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;footer-channel-item&quot;</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;footer-channel-item-link&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;#&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">img</span>
+                  <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;footer-chnnel-item-icon&quot;</span>
+                  <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;./images/icon-naver.png&quot;</span>
+                  <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;naver icon&quot;</span>
+                /&gt;</span>
+              <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">nav</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">footer</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</div></code></pre>
+<pre><code class="language-scss"><div><span class="hljs-comment">// figma : https://www.figma.com/file/9FXkniEMPgZKtJY4GwP60z/Input?node-id=0%3A3</span>
+
+<span class="hljs-comment">// color palette</span>
+<span class="hljs-variable">$gray1</span>: <span class="hljs-number">#333333</span>;
+<span class="hljs-variable">$gray2</span>: <span class="hljs-number">#4f4f4f</span>;
+<span class="hljs-variable">$gray3</span>: <span class="hljs-number">#828282</span>;
+<span class="hljs-variable">$gray4</span>: <span class="hljs-number">#bdbdbd</span>;
+<span class="hljs-variable">$gray5</span>: <span class="hljs-number">#e0e0e0</span>;
+<span class="hljs-variable">$gray6</span>: <span class="hljs-number">#f2f2f2</span>;
+<span class="hljs-variable">$gray7</span>: <span class="hljs-number">#f9f9f9</span>;
+<span class="hljs-variable">$primary</span>: <span class="hljs-number">#ed234b</span>;
+
+<span class="hljs-comment">// color variable rename</span>
+<span class="hljs-variable">$background-color</span>: <span class="hljs-variable">$gray2</span>;
+<span class="hljs-variable">$text-color</span>: <span class="hljs-variable">$gray6</span>;
+<span class="hljs-variable">$menu-text-color</span>: <span class="hljs-variable">$gray5</span>;
+<span class="hljs-variable">$divider-color</span>: <span class="hljs-variable">$gray3</span>;
+
+<span class="hljs-comment">// default</span>
+<span class="hljs-selector-tag">html</span>,
+<span class="hljs-selector-tag">body</span> {
+  <span class="hljs-attribute">font-family</span>: <span class="hljs-string">&quot;Noto Sans KR&quot;</span>, sans-serif;
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">14px</span>;
+  <span class="hljs-attribute">line-height</span>: <span class="hljs-number">20px</span>;
+  <span class="hljs-attribute">color</span>: <span class="hljs-variable">$text-color</span>;
+}
+
+<span class="hljs-selector-class">.footer</span> {
+  <span class="hljs-attribute">display</span>: flex;
+  <span class="hljs-attribute">justify-content</span>: space-between;
+  <span class="hljs-attribute">background</span>: <span class="hljs-variable">$background-color</span>;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">32px</span>;
+
+  <span class="hljs-selector-class">.footer-left-container</span> {
+    <span class="hljs-selector-class">.footer-logo</span> {
+      <span class="hljs-attribute">margin-bottom</span>: <span class="hljs-number">16px</span>;
+    }
+  }
+
+  <span class="hljs-selector-class">.footer-right-container</span> {
+    <span class="hljs-attribute">display</span>: flex;
+    <span class="hljs-attribute">flex-direction</span>: column;
+    <span class="hljs-attribute">justify-content</span>: space-between;
+
+    <span class="hljs-selector-class">.footer-menu-container</span> {
+      <span class="hljs-selector-class">.footer-menu</span> {
+        <span class="hljs-attribute">display</span>: flex;
+
+        <span class="hljs-selector-class">.footer-menu-item</span> {
+          <span class="hljs-attribute">display</span>: flex;
+          <span class="hljs-attribute">align-items</span>: center;
+
+          &amp;<span class="hljs-selector-pseudo">:not</span>(<span class="hljs-selector-pseudo">:last-child</span>)<span class="hljs-selector-pseudo">::after</span> {
+            <span class="hljs-attribute">content</span>: <span class="hljs-string">&quot;&quot;</span>;
+            <span class="hljs-attribute">background</span>: <span class="hljs-variable">$divider-color</span>;
+            <span class="hljs-attribute">height</span>: <span class="hljs-number">11px</span>;
+            <span class="hljs-attribute">width</span>: <span class="hljs-number">1px</span>;
+            <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span> <span class="hljs-number">10px</span>;
+          }
+
+          <span class="hljs-selector-class">.footer-menu-item-link</span> {
+            <span class="hljs-attribute">font-size</span>: <span class="hljs-number">12px</span>;
+            <span class="hljs-attribute">color</span>: <span class="hljs-variable">$menu-text-color</span>;
+            <span class="hljs-attribute">text-decoration</span>: none;
+          }
+        }
+      }
+    }
+
+    <span class="hljs-selector-class">.footer-channel-container</span> {
+      <span class="hljs-selector-class">.footer-channel</span> {
+        <span class="hljs-attribute">display</span>: flex;
+        <span class="hljs-attribute">justify-content</span>: flex-end;
+
+        <span class="hljs-selector-class">.footer-channel-item</span> {
+          &amp;<span class="hljs-selector-pseudo">:not</span>(<span class="hljs-selector-pseudo">:last-child</span>) {
+            <span class="hljs-attribute">margin-right</span>: <span class="hljs-number">16px</span>;
+          }
+        }
+      }
+    }
+  }
+}
+
+<span class="hljs-keyword">@media</span> screen <span class="hljs-keyword">and</span> (max-width: <span class="hljs-number">769px</span>) {
+  <span class="hljs-selector-class">.footer</span> {
+    <span class="hljs-comment">// 모바일인 경우 레이아웃 위치를 변경하기 위해</span>
+    <span class="hljs-attribute">flex-direction</span>: column;
+    <span class="hljs-attribute">padding</span>: <span class="hljs-number">24px</span> <span class="hljs-number">24px</span> <span class="hljs-number">40px</span> <span class="hljs-number">24px</span>;
+
+    <span class="hljs-selector-class">.footer-right-container</span> {
+      <span class="hljs-comment">// 모바일인 경우 레이아웃 순서를 변경하기 위해</span>
+      <span class="hljs-attribute">flex-direction</span>: column-reverse;
+
+      <span class="hljs-selector-class">.footer-menu-container</span> {
+        <span class="hljs-selector-class">.footer-menu</span> {
+          <span class="hljs-attribute">flex-direction</span>: column;
+
+          <span class="hljs-selector-class">.footer-menu-item</span> {
+            <span class="hljs-comment">//  브라우저 사이즈에 따라 메뉴의 divider를 변경하기 위해</span>
+            &amp;<span class="hljs-selector-pseudo">:not</span>(<span class="hljs-selector-pseudo">:last-child</span>)<span class="hljs-selector-pseudo">::after</span> {
+              <span class="hljs-attribute">content</span>: none;
+            }
+
+            &amp;<span class="hljs-selector-pseudo">:not</span>(<span class="hljs-selector-pseudo">:last-child</span>) {
+              <span class="hljs-attribute">margin-bottom</span>: <span class="hljs-number">8px</span>;
+            }
+
+            <span class="hljs-selector-class">.footer-menu-item-link</span> {
+              <span class="hljs-attribute">font-size</span>: <span class="hljs-number">14px</span>;
+            }
+          }
+        }
+      }
+
+      <span class="hljs-selector-class">.footer-channel-container</span> {
+        <span class="hljs-attribute">margin</span>: <span class="hljs-number">32px</span> <span class="hljs-number">0</span> <span class="hljs-number">40px</span>;
+
+        <span class="hljs-selector-class">.footer-channel</span> {
+          <span class="hljs-attribute">justify-content</span>: flex-start;
+        }
+      }
+    }
+  }
+}
+
+</div></code></pre>
+<h3 id="-case8--footer--문제와-같이-보면-좋은-팁">&lt; Case8 : Footer &gt; 문제와 같이 보면 좋은 팁</h3>
+<p>다른강사님께서 해당 출제문제를 본 후, 같이 확인하면 좋겠다고 주신 의견입니다.</p>
+<h4 id="html">HTML</h4>
+<p>푸터는 섹셔닝 콘텐츠나 섹셔닝 루트 예를 들어 <code class="code-inlineBlock">&lt;body&gt;</code>, <code class="code-inlineBlock">&lt;section&gt;</code>, <code class="code-inlineBlock">&lt;article&gt;</code> 등의 요소에서 사용할 수 있으며 작성자 정보나 저작권, 연락처 등의 정보를 담을 수 있습니다.</p>
+<p>이때 저작권 정보는 <code class="code-inlineBlock">&lt;small&gt;</code> 요소, 연락처 정보는 <code class="code-inlineBlock">&lt;address&gt;</code> 요소의 사용이 적절합니다.<br />
+HTML 제작 시 콘텐츠의 의미를 명확하게 구분할 수 있는 요소를 고민하는 것이 좀 더 양질의 마크업 코드를 구현할 수 있는 지름길이 될 수 있습니다.</p>
+<p>그리고 마크업 시에는 웹접근성 관점에서의 고민도 함께 필요합니다.
+스크린리더 등에서 푸터 콘텐츠가 랜드마크 역할로 인식되도록 하려면 WAI-ARIA의 role=”contentinfo”를 추가하시면 됩니다.</p>
+<p>푸터에 관한 내용은 공식 레퍼런스나 MDN을 참고하시기 바랍니다.</p>
+<p><a href="https://html.spec.whatwg.org/multipage/sections.html#the-footer-element">https://html.spec.whatwg.org/multipage/sections.html#the-footer-element</a></p>
+<p><a href="https://developer.mozilla.org/ko/docs/Web/HTML/Element/footer">https://developer.mozilla.org/ko/docs/Web/HTML/Element/footer</a>
+<a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/Contentinfo_role">https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/Contentinfo_role</a></p>
+<h4 id="css">CSS</h4>
+<p>많은 고객들이 CSS 작업 시 푸터 영역을 항상 브라우저 하단에 위치하도록 요구하는 경우가 있습니다.
+웹을 표현할 수 있는 디바이스가 많아지면서 화면의 크기가 다양해지기 때문에 발생하는 요구사항인데요. 반응형 디자인 시 CSS의 플렉스 관련 속성을 사용하면 이를 구현할 수 있습니다.
+해당 기능 구현은 위한 마크업 및 CSS 코드는 다음과 같습니다.</p>
+<pre><code class="language-html"><div><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;flex-container&quot;</span>&gt;</span>
+ <span class="hljs-tag">&lt;<span class="hljs-name">header</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;header&quot;</span>&gt;</span>헤더<span class="hljs-tag">&lt;/<span class="hljs-name">header</span>&gt;</span>
+ <span class="hljs-tag">&lt;<span class="hljs-name">main</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;main&quot;</span>&gt;</span>메인콘텐츠<span class="hljs-tag">&lt;/<span class="hljs-name">main</span>&gt;</span>
+ <span class="hljs-tag">&lt;<span class="hljs-name">footer</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;footer&quot;</span>&gt;</span>푸터<span class="hljs-tag">&lt;/<span class="hljs-name">footer</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</div></code></pre>
+<pre><code class="language-css"><div><span class="hljs-selector-class">.flex-container</span> {
+ <span class="hljs-attribute">display</span>: flex;
+ <span class="hljs-attribute">flex-direction</span>: column;
+}
+ 
+<span class="hljs-selector-class">.footer</span> {
+ <span class="hljs-attribute">margin-top</span>: auto;
+}
+</div></code></pre>
+<p>위 코드의 핵심은 푸터를 화면 하단에 배치하기 위해 auto 마진을 활용했다는 것입니다.
+그동안 auto 마진은 가운데 정렬 시 사용하는 트릭 정도로만 생각하고 계셨을텐데요
+플렉스 아이템에 적용하여 다양한 형태의 레이아웃 구현이 가능합니다.
+반응형 디자인에서 플렉스 관련 속성의 활용이 중요해 지고 있습니다.
+플렉스 관련 속성에 대해 보다 심도있는 관심과 학습을 권장합니다.
+보다 다양한 플렉스 레이아웃 방법이 궁금하시다면 Naver D2 사이트를 참고하시기 바랍니다.
+<a href="https://d2.naver.com/helloworld/8540176#ch4">https://d2.naver.com/helloworld/8540176#ch4</a></p>
+</body>
+</html>

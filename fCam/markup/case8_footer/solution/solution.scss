@@ -1,0 +1,125 @@
+// figma : https://www.figma.com/file/9FXkniEMPgZKtJY4GwP60z/Input?node-id=0%3A3
+
+// color palette
+$gray1: #333333;
+$gray2: #4f4f4f;
+$gray3: #828282;
+$gray4: #bdbdbd;
+$gray5: #e0e0e0;
+$gray6: #f2f2f2;
+$gray7: #f9f9f9;
+$primary: #ed234b;
+
+// color variable rename
+$background-color: $gray2;
+$text-color: $gray6;
+$menu-text-color: $gray5;
+$divider-color: $gray3;
+
+// default
+html,
+body {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  color: $text-color;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  background: $background-color;
+  padding: 32px;
+
+  .footer-left-container {
+    .footer-logo {
+      margin-bottom: 16px;
+    }
+  }
+
+  .footer-right-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .footer-menu-container {
+      .footer-menu {
+        display: flex;
+
+        .footer-menu-item {
+          display: flex;
+          align-items: center;
+
+          &:not(:last-child)::after {
+            content: "";
+            background: $divider-color;
+            height: 11px;
+            width: 1px;
+            margin: 0 10px;
+          }
+
+          .footer-menu-item-link {
+            font-size: 12px;
+            color: $menu-text-color;
+            text-decoration: none;
+          }
+        }
+      }
+    }
+
+    .footer-channel-container {
+      .footer-channel {
+        display: flex;
+        justify-content: flex-end;
+
+        .footer-channel-item {
+          &:not(:last-child) {
+            margin-right: 16px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 769px) {
+  .footer {
+    // 모바일인 경우 레이아웃 위치를 변경하기 위해
+    flex-direction: column;
+    padding: 24px 24px 40px 24px;
+
+    .footer-right-container {
+      // 모바일인 경우 레이아웃 순서를 변경하기 위해
+      flex-direction: column-reverse;
+
+      .footer-menu-container {
+        .footer-menu {
+          flex-direction: column;
+
+          .footer-menu-item {
+            //  브라우저 사이즈에 따라 메뉴의 divider를 변경하기 위해
+            &:not(:last-child)::after {
+              content: none;
+            }
+
+            &:not(:last-child) {
+              margin-bottom: 8px;
+            }
+
+            .footer-menu-item-link {
+              font-size: 14px;
+            }
+          }
+        }
+      }
+
+      .footer-channel-container {
+        margin: 32px 0 40px;
+
+        .footer-channel {
+          justify-content: flex-start;
+        }
+      }
+    }
+  }
+}

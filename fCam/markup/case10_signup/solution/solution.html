@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>04-signup (solution)</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="solution.css" />
+  </head>
+  <body>
+    <div class="signup-container">
+      <div class="signup">
+        <div class="signup-logo">
+          <img src="./images/fastcampus-logo.png" alt="fastcampus logo" />
+        </div>
+        <h1 class="signup-title">
+          인생을 바꾸는 교육,<br />
+          패스트 캠퍼스.
+        </h1>
+
+        <form class="signup-form-container">
+          <div class="signup-form-input-container">
+            <input type="text" class="signup-form-input" placeholder="이름" />
+            <div class="signup-form-email-row">
+              <input
+                type="email"
+                class="signup-form-input"
+                placeholder="이메일"
+              />
+              <button class="signup-form-send-validation-email-button">
+                인증메일 발송
+              </button>
+            </div>
+            <input
+              type="tel"
+              class="signup-form-input"
+              placeholder="휴대폰 번호 (숫자만)"
+            />
+            <input
+              type="password"
+              class="signup-form-input"
+              placeholder="비밀번호"
+            />
+            <input
+              type="password"
+              class="signup-form-input"
+              placeholder="비밀번호 확인"
+            />
+          </div>
+
+          <div class="signup-option-container">
+            <div class="signup-option-row">
+              <div class="signup-form-checkbox-container">
+                <input
+                  type="checkbox"
+                  class="signup-form-checkbox"
+                  id="service-policy"
+                />
+                <label for="service-policy" class="signup-form-checkbox-label">
+                  서비스 이용약관 동의 (필수)
+                </label>
+              </div>
+              <a href="#" class="signup-option-policy-link">보기</a>
+            </div>
+
+            <div class="signup-option-row">
+              <div class="signup-form-checkbox-container">
+                <input
+                  type="checkbox"
+                  class="signup-form-checkbox"
+                  id="service-policy"
+                />
+                <label for="service-policy" class="signup-form-checkbox-label">
+                  개인정보 처리방침 동의 (필수)
+                </label>
+              </div>
+              <a href="#" class="signup-option-policy-link">보기</a>
+            </div>
+
+            <div class="signup-option-row">
+              <div class="signup-form-checkbox-container">
+                <input
+                  type="checkbox"
+                  class="signup-form-checkbox"
+                  id="service-policy"
+                />
+                <label for="service-policy" class="signup-form-checkbox-label">
+                  패스트캠퍼스의 소식과 다양한 안내 (선택)
+                </label>
+              </div>
+              <a href="#" class="signup-option-policy-link">보기</a>
+            </div>
+          </div>
+
+          <div class="signup-button-container">
+            <button class="signup-button">회원가입</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>check box</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/checkbox.css">
+</head>
+<body>
+    <div class="container-doc">
+
+        <!-- icon 클래스 -->
+        <span class="ico_comm ico_choice"></span>
+
+        <div class="box_choice">
+            <strong class="tit_choice">체크박스 단독 타입</strong>
+            
+            <!-- normal 타입 -->
+            <div class="item_choice type_alone">
+                <input type="checkbox" id="agreeChk1_1" class="inp_choice">
+                <label for="agreeChk1_1" class="lab_choice">
+                    <span class="ico_comm ico_choice"></span>
+                </label>
+            </div>
+
+            <!-- checked 타입 -->
+            <div class="item_choice type_alone">
+                <input type="checkbox" id="agreeChk1_2" class="inp_choice" checked="checked">
+                <label for="agreeChk1_2" class="lab_choice">
+                    <span class="ico_comm ico_choice"></span>
+                </label>
+            </div>
+            
+            <!-- disabled 타입 -->
+            <div class="item_choice type_alone">
+                <input type="checkbox" id="agreeChk1_3" class="inp_choice" disabled="disabled">
+                <label for="agreeChk1_3" class="lab_choice">
+                    <span class="ico_comm ico_choice"></span>
+                </label>
+            </div>
+
+            <!-- checked, disabled 타입 -->
+            <div class="item_choice type_alone">
+                <input type="checkbox" id="agreeChk1_4" class="inp_choice" checked="checked" disabled="disabled">
+                <label for="agreeChk1_4" class="lab_choice">
+                    <span class="ico_comm ico_choice"></span>
+                </label>
+            </div>
+        </div>
+
+        <div class="box_choice">
+            <strong class="tit_choice">체크박스 + 텍스트 타입</strong>
+
+            <!-- normal 타입 -->
+            <div class="item_choice">
+                <input type="checkbox" id="agreeChk2_1" class="inp_choice">
+                <label for="agreeChk2_1" class="lab_choice">
+                    <span class="ico_comm ico_choice"></span>
+                    normal
+                </label>
+            </div>
+
+            <!-- checked 타입 -->
+            <div class="item_choice">
+                <input type="checkbox" id="agreeChk2_2" class="inp_choice" checked="checked">
+                <label for="agreeChk2_2" class="lab_choice">
+                    <span class="ico_comm ico_choice"></span>
+                    checked
+                </label>
+            </div>
+
+            <!-- disabled 타입 -->
+            <div class="item_choice">
+                <input type="checkbox" id="agreeChk2_3" class="inp_choice" disabled="disabled">
+                <label for="agreeChk2_3" class="lab_choice">
+                    <span class="ico_comm ico_choice"></span>
+                    normal disabled
+                </label>
+            </div>
+
+            <!-- checked, disabled 타입 -->
+            <div class="item_choice">
+                <input type="checkbox" id="agreeChk2_4" class="inp_choice" checked="checked" disabled="disabled">
+                <label for="agreeChk2_4" class="lab_choice">
+                    <span class="ico_comm ico_choice"></span>
+                    checked disabled
+                </label>
+            </div>
+        </div>
+
+        <div class="box_choice">
+            <strong class="tit_choice">체크박스 + 텍스트 2줄이상 길어진 타입</strong>
+            
+            <!-- normal 타입 -->
+            <div class="item_choice">
+                <input type="checkbox" id="agreeChk3_1" class="inp_choice">
+                <label for="agreeChk3_1" class="lab_choice">
+                    <span class="ico_comm ico_choice"></span>
+                    normal normal normal
+                </label>
+            </div>
+
+            <!-- checked 타입 -->
+            <div class="item_choice">
+                <input type="checkbox" id="agreeChk3_2" class="inp_choice" checked="checked">
+                <label for="agreeChk3_2" class="lab_choice">
+                    <span class="ico_comm ico_choice"></span>
+                    checked checked checked
+                </label>
+            </div>
+
+            <!-- disabled 타입 -->
+            <div class="item_choice">
+                <input type="checkbox" id="agreeChk3_3" class="inp_choice" disabled="disabled">
+                <label for="agreeChk3_3" class="lab_choice">
+                    <span class="ico_comm ico_choice"></span>
+                    normal disabled normal disabled normal disabled
+                </label>
+            </div>
+
+            <!-- checked, disabled 타입 -->
+            <div class="item_choice">
+                <input type="checkbox" id="agreeChk3_4" class="inp_choice" checked="checked" disabled="disabled">
+                <label for="agreeChk3_4" class="lab_choice">
+                    <span class="ico_comm ico_choice"></span>
+                    checked disabled checked disabled checked disabled
+                </label>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

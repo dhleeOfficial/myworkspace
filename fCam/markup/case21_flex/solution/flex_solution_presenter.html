@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Case21: Flex - 출제자 해설코드</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css" />
+    <style>
+        /*
+      ==================== html => MD 작업 시, 꼭! 확인해주세요. ====================
+      1. Markdown All in One : Print current document to HTML 실행. (VScode extension)
+      2. 생성된 README.html에서 body 태그 안에 있는것들을 복사
+      3. 루트 폴더에 README_OOO.md 생성 (OOO : Case 이름)
+      4. ! 자동완성을 통해 기본 html 폼을 만들고, body태그 안에 <2>의 내용 붙여넣기
+      5. font / code style에 관련된 <link>세줄과 <style> 태그 안에 있는 내용 붙여넣기
+      6. 상단 <title> 태그 안에 <h2> 텍스트 삽입
+      7. <code> tag가 줄바꿈 될 때, class명으로 "code-inlineBlock" 넣어주기
+      8. <img>태그 경로 변경해주기
+      [ EXAMPLE ]
+      [ 변경 전 ] : 절대경로로 되어있음
+      <img
+          width="600px"
+          src="file:////Users/ming/Desktop/ui-component/case2_InfiniteScroll/example_image.gif"
+        />
+      [ 변경 후 ] : 상대경로로 수정
+      <img
+          width="600px"
+          src="./example_image.gif"
+        />
+      8. html 내에 <h3>실행 방법 및 의존성 모듈 설치</h3> 하위 내용 아래와 같이 수정
+      [ EXAMPLE ]
+      [ 변경 전 ] : p에 className 없음
+        <p>
+          <strong>q1</strong>
+          경로
+          <code>./question/q1_js</code>
+          index.html 열기
+        </p>
+      [ 변경 후 ] : p에 className 있음
+        <p>
+          <strong>q1</strong>
+          경로
+          <code>./question/q1_js</code>
+          <p class="excute-text">index.html 열기</p>
+        </p>
+
+
+      [ 변경 전 ] : p태그와 pre태그가 div로 감싸져있지 않음
+        <p>
+          <strong>q4</strong>
+          경로
+          <code>./question/q4_react.js</code>
+        </p>
+
+        <p>터미널</p>
+        <pre><code class="language-bash"><div>  $ npm install
+        $ npm start
+      </div></code></pre>
+
+      [ 변경 후 ] : p태그와 pre태그가 div.code-wrap 으로 감싸져있음
+        <p>
+          <strong>q4</strong>
+          경로
+          <code>./question/q4_react.js</code>
+        </p>
+
+        <div class="code-wrap">
+        <p>터미널</p>
+        <pre>
+          <code class="language-bash"><div>  $ npm install
+      $ npm start
+    </div></code></pre>
+    </div>
+    */
+
+        html {
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: "Noto Sans KR", sans-serif;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        ul,
+        ol,
+        li,
+        dl,
+        dt,
+        dd,
+        p,
+        table {
+            margin: 0;
+            padding: 0;
+            color: #494949;
+            letter-spacing: -0.025rem;
+            box-sizing: border-box;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-weight: 600;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: inherit;
+        }
+
+        a img {
+            border: none;
+        }
+
+        img {
+            max-width: 100%;
+            vertical-align: middle;
+        }
+
+        ul li {
+            list-style: none;
+        }
+
+        p {
+            line-height: 1.8;
+        }
+
+        /* STYLE */
+
+        body {
+            padding: 0;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        h2 {
+            padding: 50px 0;
+            color: #ffffff;
+            font-size: 2rem;
+            text-align: center;
+            background: linear-gradient(45deg, #ed234b, #ff6c89, #ff6fb7);
+        }
+
+        h2::before {
+            content: "#";
+            display: inline-block;
+            margin-right: 5px;
+            color: #ff9db0;
+            font-weight: 300;
+            font-size: 2.2rem;
+        }
+
+        h3 {
+            position: relative;
+            margin: 30px 20px;
+            padding-bottom: 15px;
+            color: #303030;
+            font-size: 1.6rem;
+            border-bottom: 1px solid #ededed;
+        }
+
+        blockquote {
+            margin: 20px;
+            padding: 20px;
+            background: #f2f2f2;
+        }
+
+        strong {
+            display: block;
+            margin-top: 10px;
+        }
+
+        .code-wrap {
+            position: relative;
+            background: #2f303b;
+            margin: 15px 0 0 0;
+        }
+
+        .code-wrap>p {
+            position: absolute;
+            left: 0;
+            top: 0;
+            padding: 2px 15px;
+            font-size: 0.7rem;
+            color: #ffffff;
+            text-align: center;
+            background: #61c8cc;
+        }
+
+        code {
+            background: #ededed;
+        }
+
+        .language-html>div,
+        .language-css>div,
+        .language-scss>div,
+        .language-js>div {
+            color: #fff;
+            padding: 30px 20px;
+            background: #2f303b;
+        }
+
+        code.language-bash div {
+            margin-top: -20px;
+            padding: 30px 20px;
+            font-size: 1rem;
+            color: #ffffff;
+            background: #2f303b;
+            box-sizing: border-box;
+        }
+
+        code::after {
+            content: "";
+            display: block;
+        }
+
+        code.code-inlineBlock::after {
+            content: "";
+            display: inline-block;
+        }
+
+        .excute-text {
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: #ed234b;
+        }
+
+        ol>li>ul,
+        ul>li>ul {
+            background: #ffffff;
+        }
+
+        /* 좌, 우 여백 */
+
+        ol,
+        ul {
+            margin: 20px;
+            padding: 20px;
+            background: #f2f2f2;
+        }
+
+        ol li {
+            margin-left: 15px;
+        }
+
+        li {
+            font-size: 0.85rem;
+        }
+
+        h4,
+        h5,
+        h6,
+        p,
+        img,
+        pre {
+            padding: 0 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2 id="case21-flex---출제자-해설">Case21: Flex - 출제자 해설코드</h2>
+    <pre><code class="language-scss"><div><span class="hljs-keyword">@charset</span> <span class="hljs-string">&quot;utf-8&quot;</span>;
+
+<span class="hljs-comment">/* variables */</span>
+
+<span class="hljs-variable">$w100</span>: <span class="hljs-number">100%</span>;
+<span class="hljs-variable">$half</span>: <span class="hljs-number">50%</span>;
+<span class="hljs-variable">$large_box</span>: <span class="hljs-number">220px</span>;
+<span class="hljs-variable">$small_box</span>: <span class="hljs-number">140px</span>;
+<span class="hljs-variable">$basis_space</span>: <span class="hljs-number">40px</span>;
+<span class="hljs-variable">$item_space</span>: <span class="hljs-number">10px</span>;
+<span class="hljs-variable">$padding</span>: <span class="hljs-number">15px</span>;
+<span class="hljs-variable">$box-shadow</span>: <span class="hljs-number">14px</span> <span class="hljs-number">17px</span> <span class="hljs-number">34px</span> -<span class="hljs-number">20px</span> rgba(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0.75</span>);
+<span class="hljs-variable">$platform_tablet</span>: <span class="hljs-number">1024px</span>;
+<span class="hljs-variable">$platform_pablet</span>: <span class="hljs-number">767px</span>;
+<span class="hljs-variable">$platform_mobile</span>: <span class="hljs-number">480px</span>;
+
+<span class="hljs-comment">/* reset */</span>
+
+*,
+*<span class="hljs-selector-pseudo">:before</span>,
+*<span class="hljs-selector-pseudo">:after</span> {
+    <span class="hljs-attribute">box-sizing</span>: border-box;
+}
+
+*<span class="hljs-selector-pseudo">:focus</span> {
+    <span class="hljs-attribute">outline</span>: none;
+}
+
+<span class="hljs-selector-tag">html</span>,
+<span class="hljs-selector-tag">body</span> {
+    <span class="hljs-attribute">position</span>: relative;
+    <span class="hljs-attribute">width</span>: <span class="hljs-variable">$w100</span>;
+    <span class="hljs-attribute">height</span>: <span class="hljs-variable">$w100</span>;
+    <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span>;
+    <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;
+}
+
+<span class="hljs-selector-tag">h1</span> {
+    <span class="hljs-attribute">text-align</span>: center;
+    <span class="hljs-attribute">margin</span>: <span class="hljs-number">35px</span> auto <span class="hljs-number">0</span>;
+}
+
+
+<span class="hljs-comment">/* mixin */</span>
+
+<span class="hljs-comment">// 큰 박스 개수, 작은 박스 개수, 아이템 너비, 세로로 가장 긴 라인의 아이템 개수, 컬럼 숫자, 아이템의 높이</span>
+<span class="hljs-keyword">@mixin</span> responsiveMixin(<span class="hljs-variable">$largeNum</span>, <span class="hljs-variable">$smallNum</span>, <span class="hljs-variable">$itemWidth</span>, <span class="hljs-variable">$itemNum</span>, <span class="hljs-variable">$colNum</span>, <span class="hljs-variable">$nthNum</span>) {
+    <span class="hljs-comment">// 가장 긴 라인의 큰 박스 개수 + 작은 박스 + 기준 여백 위아래 2곳 + 각 아이템 별 하단 여백 * 아이템 개수</span>
+    <span class="hljs-attribute">height</span>: calc(#{<span class="hljs-variable">$large_box</span>} * #{<span class="hljs-variable">$largeNum</span>} + #{<span class="hljs-variable">$small_box</span>} * #{<span class="hljs-variable">$smallNum</span>} + #{<span class="hljs-variable">$basis_space</span>} * <span class="hljs-number">2</span> + #{<span class="hljs-variable">$item_space</span>} * #{<span class="hljs-variable">$itemNum</span>});
+    <span class="hljs-selector-class">.item</span> {
+        <span class="hljs-attribute">width</span>: calc(#{<span class="hljs-variable">$itemWidth</span>} - #{<span class="hljs-variable">$item_space</span>});
+        <span class="hljs-comment">// 기본 박스 높이는 nthNum을 사용합니다.</span>
+        &amp;<span class="hljs-selector-pseudo">:nth-of-type</span>(#{<span class="hljs-variable">$nthNum</span>}n) {
+            <span class="hljs-attribute">height</span>: <span class="hljs-variable">$small_box</span>;
+        }
+        &amp;<span class="hljs-selector-pseudo">:nth-of-type</span>(#{<span class="hljs-variable">$nthNum</span> + 1}n) {
+            <span class="hljs-attribute">height</span>: <span class="hljs-variable">$large_box</span>;
+        }
+        <span class="hljs-comment">// 수평 레이아웃을 위한 세팅입니다.</span>
+        &amp;<span class="hljs-selector-class">.horizontal</span> {
+            <span class="hljs-comment">// 순서 세팅은 colNum을 사용합니다.</span>
+            <span class="hljs-keyword">@for</span> <span class="hljs-variable">$i</span> from <span class="hljs-number">1</span> through <span class="hljs-variable">$colNum</span> - <span class="hljs-number">1</span> {
+                &amp;<span class="hljs-selector-pseudo">:nth-of-type</span>(#{<span class="hljs-variable">$colNum</span>}n + #{<span class="hljs-variable">$i</span>}) {
+                    <span class="hljs-attribute">order</span>: #{<span class="hljs-variable">$i</span>};
+                }
+            }
+            &amp;<span class="hljs-selector-pseudo">:nth-of-type</span>(#{<span class="hljs-variable">$colNum</span>}n) {
+                <span class="hljs-attribute">order</span>: #{<span class="hljs-variable">$colNum</span>};
+            }
+        }
+    }
+}
+
+<span class="hljs-selector-class">.flex_wrap</span> {
+    <span class="hljs-comment">/* 나름의 css 선택자의 순서 규칙을 가지고 작성하면 다른 사람들이 유지보수할 때 패턴을 파악하기 용이합니다.
+     * 저는 다음과 같은 규칙을 가지고 작성합니다.
+     * display 속성 -&gt; 포지션에 대한 속성 -&gt; 너비 높이 -&gt; 여백 -&gt; 백그라운드 컬러 등 기타 속성 -&gt; 텍스트 속성
+     */</span>
+    <span class="hljs-attribute">display</span>: flex;
+    <span class="hljs-attribute">flex-flow</span>: column wrap;
+    <span class="hljs-attribute">align-content</span>: space-between;
+    <span class="hljs-attribute">width</span>: <span class="hljs-variable">$w100</span>;
+    <span class="hljs-attribute">max-width</span>: <span class="hljs-variable">$platform_tablet</span>;
+    <span class="hljs-attribute">margin</span>: <span class="hljs-variable">$basis_space</span> auto;
+    <span class="hljs-attribute">padding</span>: <span class="hljs-variable">$basis_space</span>;
+    <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#fafafa</span>;
+    <span class="hljs-attribute">counter-reset</span>: items;
+    <span class="hljs-keyword">@include</span> responsiveMixin(<span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">25%</span>, <span class="hljs-number">5</span>, <span class="hljs-number">4</span>, <span class="hljs-number">2</span>);
+    <span class="hljs-selector-class">.item</span> {
+        <span class="hljs-attribute">display</span>: flex;
+        <span class="hljs-attribute">position</span>: relative;
+        <span class="hljs-attribute">height</span>: <span class="hljs-variable">$small_box</span>;
+        <span class="hljs-attribute">margin-bottom</span>: <span class="hljs-variable">$item_space</span>;
+        <span class="hljs-attribute">padding</span>: <span class="hljs-variable">$padding</span>;
+        -webkit-<span class="hljs-attribute">box-shadow</span>: <span class="hljs-variable">$box-shadow</span>;
+        <span class="hljs-attribute">box-shadow</span>: <span class="hljs-variable">$box-shadow</span>;
+        <span class="hljs-attribute">color</span>: <span class="hljs-number">#000</span>;
+        <span class="hljs-attribute">box-sizing</span>: border-box;
+        <span class="hljs-attribute">overflow</span>: hidden;
+        <span class="hljs-attribute">background-color</span>: rgba(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, .<span class="hljs-number">3</span>);
+        <span class="hljs-selector-tag">img</span> {
+            <span class="hljs-attribute">position</span>: absolute;
+            <span class="hljs-attribute">left</span>: <span class="hljs-variable">$half</span>;
+            <span class="hljs-attribute">top</span>: <span class="hljs-variable">$half</span>;
+            -webkit-<span class="hljs-attribute">transform</span>: translate3d(-<span class="hljs-variable">$half</span>, -<span class="hljs-variable">$half</span>, <span class="hljs-number">0</span>);
+            <span class="hljs-attribute">transform</span>: translate3d(-<span class="hljs-variable">$half</span>, -<span class="hljs-variable">$half</span>, <span class="hljs-number">0</span>);
+        }
+        &amp;<span class="hljs-selector-pseudo">:before</span> {
+            <span class="hljs-attribute">counter-increment</span>: items;
+            <span class="hljs-attribute">content</span>: counter(items);
+            <span class="hljs-attribute">position</span>: relative;
+            <span class="hljs-attribute">z-index</span>: <span class="hljs-number">1</span>;
+            <span class="hljs-attribute">color</span>: <span class="hljs-number">#fff</span>;
+        }
+    }
+    <span class="hljs-keyword">@media</span> (max-width: <span class="hljs-variable">$platform_tablet</span>) {
+        <span class="hljs-keyword">@include</span> responsiveMixin(<span class="hljs-number">2</span>, <span class="hljs-number">5</span>, <span class="hljs-number">33.33%</span>, <span class="hljs-number">7</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>);
+    }
+    <span class="hljs-keyword">@media</span> (max-width: <span class="hljs-variable">$platform_pablet</span>) {
+        <span class="hljs-keyword">@include</span> responsiveMixin(<span class="hljs-number">3</span>, <span class="hljs-number">7</span>, <span class="hljs-variable">$half</span>, <span class="hljs-number">10</span>, <span class="hljs-number">2</span>, <span class="hljs-number">2</span>);
+    }
+    <span class="hljs-keyword">@media</span> (max-width: <span class="hljs-variable">$platform_mobile</span>) {
+        <span class="hljs-keyword">@include</span> responsiveMixin(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-variable">$w100</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>);
+        <span class="hljs-attribute">height</span>: auto;
+        <span class="hljs-comment">// mobile class는 css 선택자의 우선순위를 높이기 위함입니다.(important 사용 지양을 위함)</span>
+        <span class="hljs-selector-class">.item</span><span class="hljs-selector-class">.mobile</span> {
+            <span class="hljs-attribute">width</span>: <span class="hljs-variable">$w100</span>;
+            <span class="hljs-attribute">height</span>: <span class="hljs-variable">$large_box</span>;
+        }
+    }
+}
+</div></code></pre>
+</body>
+
+</html>

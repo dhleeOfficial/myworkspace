@@ -1,0 +1,35 @@
+@charset "UTF-8";
+
+/* reset */
+*{font-weight:500;font-family:"Noto Sans KR";color:#625F67}
+input[type="checkbox"]{margin:0}
+
+/* sprite */
+.ico_comm{display:inline-block;overflow:hidden;font-size:0;line-height:0;background:url(../images/ico_comm.png) no-repeat 0 0;text-indent:-9999px;vertical-align:top}
+.ico_choice{width:18px;height:18px;background-position:0 0}
+
+/* content */
+.box_choice{margin:20px 0}
+.tit_choice{display:block;margin:10px 0}
+
+/* checkbox */
+/* checkbox 스타일 작성 영역 */
+.item_choice{
+    display:inline-block;position:relative;max-width:150px;vertical-align:top;
+    .inp_choice{
+        position:absolute;top:0;left:0;width:18px;height:18px;
+        appearance:none;-webkit-appearance:none;-moz-appearance:none;cursor:pointer;
+        &:checked + .lab_choice .ico_choice{background-position:-20px 0;pointer-events:none}
+        &:disabled,
+        &:checked:disabled{cursor:not-allowed}
+        &:disabled + .lab_choice,
+        &:checked:disabled + .lab_choice{cursor:not-allowed}
+        &:disabled + .lab_choice .ico_choice{background-position:-40px 0}
+        &:checked:disabled + .lab_choice .ico_choice{background-position:-60px 0}
+    }
+    .lab_choice{
+        display:block;position:relative;padding-left:26px;font-size:14px;line-height:18px;cursor:pointer;
+        .ico_choice{position:absolute;top:0;left:0;background-color:#fff}
+    }
+    &.type_alone .lab_choice{min-width:18px;min-height:18px;padding-left:0}
+}

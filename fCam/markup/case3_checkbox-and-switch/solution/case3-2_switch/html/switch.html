@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>switch(toggle)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/switch.css">
+</head>
+<body>
+    <div class="container-doc">
+
+        <div class="box_choice">
+            <strong class="tit_choice">스위치 단독 타입</strong>
+            
+            <!-- normal 타입 -->
+            <div class="item_choice type_alone">
+                <input type="checkbox" id="switch1_1" class="inp_switch">
+                <label for="switch1_1" class="lab_choice"></label>
+            </div>
+
+            <!-- checked 타입 -->
+            <div class="item_choice type_alone">
+                <input type="checkbox" id="switch1_2" class="inp_switch" checked="checked">
+                <label for="switch1_2" class="lab_choice"></label>
+            </div>
+            
+            <!-- disabled 타입 -->
+            <div class="item_choice type_alone">
+                <input type="checkbox" id="switch1_3" class="inp_switch" disabled="disabled">
+                <label for="switch1_3" class="lab_choice"></label>
+            </div>
+
+            <!-- checked, disabled 타입 -->
+            <div class="item_choice type_alone">
+                <input type="checkbox" id="switch1_4" class="inp_switch" checked="checked" disabled="disabled">
+                <label for="switch1_4" class="lab_choice"></label>
+            </div>
+        </div>
+
+        <div class="box_choice">
+            <strong class="tit_choice">스위치 + 텍스트 타입</strong>
+
+            <!-- normal 타입 -->
+            <div class="item_choice">
+                <input type="checkbox" id="switch2_1" class="inp_switch">
+                <label for="switch2_1" class="lab_choice">
+                    <span class="txt_switch">normal</span>
+                </label>
+            </div>
+
+            <!-- checked 타입 -->
+            <div class="item_choice">
+                <input type="checkbox" id="switch2_2" class="inp_switch" checked="checked">
+                <label for="switch2_2" class="lab_choice">
+                    <span class="txt_switch">checked</span>
+                </label>
+            </div>
+
+            <!-- disabled 타입 -->
+            <div class="item_choice">
+                <input type="checkbox" id="switch2_3" class="inp_switch" disabled="disabled">
+                <label for="switch2_3" class="lab_choice">
+                    <span class="txt_switch">normal disabled</span>
+                </label>
+            </div>
+
+            <!-- checked, disabled 타입 -->
+            <div class="item_choice">
+                <input type="checkbox" id="switch2_4" class="inp_switch" checked="checked" disabled="disabled">
+                <label for="switch2_4" class="lab_choice">
+                    <span class="txt_switch">checked disabled</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="box_choice">
+            <strong class="tit_choice">스위치 + 텍스트 반대 타입</strong>
+            
+            <!-- normal 타입 -->
+            <div class="item_choice type_reverse">
+                <input type="checkbox" id="agreeChk3_1" class="inp_switch">
+                <label for="agreeChk3_1" class="lab_choice">
+                    <span class="txt_switch">normal</span>
+                </label>
+            </div>
+
+            <!-- checked 타입 -->
+            <div class="item_choice type_reverse">
+                <input type="checkbox" id="agreeChk3_2" class="inp_switch" checked="checked">
+                <label for="agreeChk3_2" class="lab_choice">
+                    <span class="txt_switch">checked</span>
+                </label>
+            </div>
+
+            <!-- disabled 타입 -->
+            <div class="item_choice type_reverse">
+                <input type="checkbox" id="agreeChk3_3" class="inp_switch" disabled="disabled">
+                <label for="agreeChk3_3" class="lab_choice">
+                    <span class="txt_switch">normal disabled</span>
+                </label>
+            </div>
+
+            <!-- checked, disabled 타입 -->
+            <div class="item_choice type_reverse">
+                <input type="checkbox" id="agreeChk3_4" class="inp_switch" checked="checked" disabled="disabled">
+                <label for="agreeChk3_4" class="lab_choice">
+                    <span class="txt_switch">checked disabled</span>
+                </label>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

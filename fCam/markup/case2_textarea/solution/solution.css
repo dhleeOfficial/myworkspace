@@ -1,0 +1,98 @@
+.form-label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #333333;
+}
+
+input, textarea {
+  -webkit-appearance: none;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+}
+
+.form-input,
+.form-textarea {
+  display: block;
+  padding: 0 16px;
+  width: 100%;
+  height: 48px;
+  border-radius: 4px;
+  border: 1px solid #E0E0E0;
+  background: #fff;
+  font-size: 14px;
+  color: #333333;
+}
+
+.form-input::-webkit-scrollbar,
+.form-textarea::-webkit-scrollbar {
+  width: 4px;
+}
+
+.form-input::-webkit-scrollbar-thumb,
+.form-textarea::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  /* Chrome, Safari, Firefox */
+  color: #BDBDBD;
+}
+
+.form-input:-ms-input-placeholder,
+.form-textarea:-ms-input-placeholder {
+  /* IE, Edge */
+  color: #BDBDBD;
+}
+
+.form-input.error,
+.form-textarea.error {
+  border-color: #EB5757;
+  color: #EB5757;
+}
+
+.form-input.error + .txt-error,
+.form-textarea.error + .txt-error {
+  display: block;
+}
+
+.form-input:not(.error):not([readonly]):not(:disabled):hover,
+.form-textarea:not(.error):not([readonly]):not(:disabled):hover {
+  border-color: #828282;
+}
+
+.form-input:not(.error):not([readonly]):not(:disabled):focus,
+.form-textarea:not(.error):not([readonly]):not(:disabled):focus {
+  border-color: #333333;
+}
+
+.form-input[readonly],
+.form-textarea[readonly] {
+  background-color: #F9F9F9;
+  cursor: default;
+}
+
+.form-input:disabled,
+.form-textarea:disabled {
+  background-color: #F9F9F9;
+  color: #BDBDBD;
+  cursor: not-allowed;
+}
+
+.form-textarea {
+  padding: 16px;
+  height: auto;
+  resize: none;
+}
+
+.txt-error {
+  display: none;
+  margin-top: 8px;
+  font-size: 14px;
+  color: #EB5757;
+}

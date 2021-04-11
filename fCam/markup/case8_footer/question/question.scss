@@ -1,0 +1,36 @@
+// figma : https://www.figma.com/file/9FXkniEMPgZKtJY4GwP60z/Input?node-id=0%3A3
+
+// color palette
+$gray1: #333333;
+$gray2: #4f4f4f;
+$gray3: #828282;
+$gray4: #bdbdbd;
+$gray5: #e0e0e0;
+$gray6: #f2f2f2;
+$gray7: #f9f9f9;
+$primary: #ed234b;
+
+// color variable rename
+$background-color: $gray2;
+$text-color: $gray6;
+$menu-text-color: $gray5;
+$divider-color: $gray3;
+
+// default
+html,
+body {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  color: $text-color;
+}
+
+.footer {
+  // type here
+}
+
+@media screen and (max-width: 769px) {
+  .footer {
+    // type here
+  }
+}

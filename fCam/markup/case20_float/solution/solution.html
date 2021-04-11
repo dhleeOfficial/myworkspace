@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <title>01-float</title>
+    <link rel="stylesheet" href="./solution.css" />
+</head>
+
+<body>
+    <h1>float</h1>
+    <div class="float_wrap">
+        <div class="item_wrap">
+            <!-- 각 레이아웃이 나눠지는 만큼 큰 덩어리 단위로 우선 구분지어줍니다. -->
+            <div class="item large"><img src="./img/box_1.jpg" alt="" /></div>
+            <!-- 큰 덩어리 단위로 감싸야 하는 이유가 충분하다면 감싸야합니다. -->
+            <div class="item_child_wrap">
+                <div class="item small"><img src="./img/box_2.jpg" alt="" /></div>
+                <div class="item small"><img src="./img/box_3.jpg" alt="" /></div>
+            </div>
+            <div class="item large"><img src="./img/box_4.jpg" alt=""></div>
+        </div>
+        <div class="item_wrap">
+            <div class="item_child_wrap">
+                <div class="item half small"><img src="./img/box_5.jpg" alt="" /></div>
+                <div class="item half small"><img src="./img/box_6.jpg" alt="" /></div>
+                <div class="item small w-100"><img src="./img/box_7.jpg" alt="" /></div>
+            </div>
+            <div class="item large"><img src="./img/box_8.jpg" alt=""></div>
+        </div>
+    </div>
+</body>
+
+</html>

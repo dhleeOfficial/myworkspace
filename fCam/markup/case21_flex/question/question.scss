@@ -1,0 +1,109 @@
+@charset "utf-8";
+
+/* variables */
+
+$w100: 100%;
+$half: 50%;
+$large_box: 220px;
+$small_box: 140px;
+$basis_space: 40px;
+$item_space: 10px;
+$padding: 15px;
+$box-shadow: 14px 17px 34px -20px rgba(0, 0, 0, 0.75);
+$platform_tablet: 1024px;
+$platform_pablet: 767px;
+$platform_mobile: 480px;
+
+/* reset */
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+*:focus {
+    outline: none;
+}
+
+html,
+body {
+    position: relative;
+    width: $w100;
+    height: $w100;
+    padding: 0;
+    margin: 0;
+}
+
+h1 {
+    text-align: center;
+    margin: 35px auto 0;
+}
+
+
+/* mixin */
+
+
+/* mixin은 선택사항입니다. 편한 형식으로 먼저 작성 후에 도전해보세요. */
+
+// 큰 박스 개수, 작은 박스 개수, 아이템 너비, 세로로 가장 긴 라인의 아이템 개수, 컬럼 숫자, 아이템의 높이
+@mixin responsiveMixin($largeNum, $smallNum, $itemWidth, $itemNum, $colNum, $nthNum) {
+    height: calc(#{$large_box} * #{$largeNum} + #{$small_box} * #{$smallNum} + #{$basis_space} * 2 + #{$item_space} * #{$itemNum});
+    /* type here (mixin으로 작성한다면 아래를 채워서 한 곳에 모아 모듈화를 해보세요..) */
+}
+
+
+/* pc */
+
+.flex_wrap {
+    display: flex;
+    /* type here */
+    width: $w100;
+    max-width: $platform_tablet;
+    margin: $basis_space auto;
+    padding: $basis_space;
+    background-color: #fafafa;
+    counter-reset: items;
+    .item {
+        /* type here */
+        position: relative;
+        height: $small_box;
+        margin-bottom: $item_space;
+        padding: $padding;
+        -webkit-box-shadow: $box-shadow;
+        box-shadow: $box-shadow;
+        color: #000;
+        box-sizing: border-box;
+        overflow: hidden;
+        background-color: rgba(0, 0, 0, .3);
+        img {
+            position: absolute;
+            left: $half;
+            top: $half;
+            -webkit-transform: translate3d(-$half, -$half, 0);
+            transform: translate3d(-$half, -$half, 0);
+        }
+        &:before {
+            counter-increment: items;
+            content: counter(items);
+            position: relative;
+            z-index: 1;
+            color: #fff;
+        }
+    }
+    /* type here */
+}
+
+@media (max-width: $platform_tablet) {
+    /* type here */
+}
+
+@media (max-width: $platform_pablet) {
+    /* type here */
+}
+
+@media (max-width: $platform_mobile) {
+    // only_m class는 css 선택자의 우선순위를 높이기 위함입니다.(important 사용 지양을 위함)
+    /* type here */
+    .item.mobile {}
+}

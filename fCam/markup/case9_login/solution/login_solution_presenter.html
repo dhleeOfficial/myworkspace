@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Case9 : Login - 출제자 해설코드</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css"
+    />
+    <style>
+      /*
+      ==================== html => MD 작업 시, 꼭! 확인해주세요. ====================
+      1. Markdown All in One : Print current document to HTML 실행. (VScode extension)
+      2. 생성된 README.html에서 body 태그 안에 있는것들을 복사
+      3. README_OOO.html 로 파일명 수정 (OOO => Case 이름)
+      4. ! 자동완성을 통해 기본 html 폼을 만들고, body태그 안에 <2>의 내용 붙여넣기
+      5. font / code style에 관련된 <link>세줄과 <style> 태그 안에 있는 내용 붙여넣기
+      6. 상단 <title> 태그 안에 <h2> 텍스트 삽입
+      7. <code> tag가 줄바꿈 될 때, class명으로 "code-inlineBlock" 넣어주기
+      8. <img>태그 경로 변경해주기
+      [ EXAMPLE ]
+      [ 변경 전 ] : 절대경로로 되어있음
+      <img
+          width="600px"
+          src="file:////Users/ming/Desktop/ui-component/case2_InfiniteScroll/example_image.gif"
+        />
+      [ 변경 후 ] : 상대경로로 수정
+      <img
+          width="600px"
+          src="./example_image.gif"
+        />
+      8. html 내에 <h3>실행 방법 및 의존성 모듈 설치</h3> 하위 내용 아래와 같이 수정
+      [ EXAMPLE ]
+      [ 변경 전 ] : p에 className 없음
+        <p>
+          <strong>q1</strong>
+          경로
+          <code>./question/q1_js</code>
+          index.html 열기
+        </p>
+      [ 변경 후 ] : p에 className 있음
+        <p>
+          <strong>q1</strong>
+          경로
+          <code>./question/q1_js</code>
+          <p class="excute-text">index.html 열기</p>
+        </p>
+
+
+      [ 변경 전 ] : p태그와 pre태그가 div로 감싸져있지 않음
+        <p>
+          <strong>q4</strong>
+          경로
+          <code>./question/q4_react.js</code>
+        </p>
+
+        <p>터미널</p>
+        <pre><code class="language-bash"><div>  $ npm install
+        $ npm start
+      </div></code></pre>
+
+      [ 변경 후 ] : p태그와 pre태그가 div.code-wrap 으로 감싸져있음
+        <p>
+          <strong>q4</strong>
+          경로
+          <code>./question/q4_react.js</code>
+        </p>
+
+        <div class="code-wrap">
+        <p>터미널</p>
+        <pre>
+          <code class="language-bash"><div>  $ npm install
+      $ npm start
+    </div></code></pre>
+    </div>
+    */
+
+      html {
+        overflow-x: hidden;
+      }
+
+      body {
+        font-family: "Noto Sans KR", sans-serif;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      ul,
+      ol,
+      li,
+      dl,
+      dt,
+      dd,
+      p,
+      table {
+        margin: 0;
+        padding: 0;
+        color: #494949;
+        letter-spacing: -0.025rem;
+        box-sizing: border-box;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-weight: 600;
+      }
+
+      a {
+        text-decoration: inherit;
+        display: block;
+        color: #5e9cff;
+        text-decoration: underline;
+      }
+
+      a::before {
+        content: "📎";
+      }
+
+      a img {
+        border: none;
+      }
+
+      img {
+        max-width: 100%;
+        vertical-align: middle;
+      }
+
+      ul li {
+        list-style: none;
+      }
+
+      p {
+        line-height: 1.8;
+      }
+
+      /* STYLE */
+
+      body {
+        padding: 0;
+        margin: 0;
+        line-height: 1.6;
+      }
+
+      h2 {
+        padding: 50px 0;
+        color: #ffffff;
+        font-size: 2rem;
+        text-align: center;
+        background: linear-gradient(45deg, #ed234b, #ff6c89, #ff6fb7);
+      }
+
+      h2::before {
+        content: "#";
+        display: inline-block;
+        margin-right: 5px;
+        color: #ff9db0;
+        font-weight: 300;
+        font-size: 2.2rem;
+      }
+
+      h3 {
+        position: relative;
+        margin: 30px 20px;
+        padding-bottom: 15px;
+        color: #303030;
+        font-size: 1.6rem;
+        border-bottom: 1px solid #ededed;
+      }
+
+      blockquote {
+        margin: 20px;
+        padding: 20px;
+        background: #f2f2f2;
+      }
+
+      strong {
+        display: block;
+        margin-top: 10px;
+      }
+
+      .code-wrap {
+        position: relative;
+        background: #2f303b;
+        margin: 15px 0 0 0;
+      }
+
+      .code-wrap > p {
+        position: absolute;
+        left: 0;
+        top: 0;
+        padding: 2px 15px;
+        font-size: 0.7rem;
+        color: #ffffff;
+        text-align: center;
+        background: #61c8cc;
+      }
+
+      code {
+        background: #ededed;
+      }
+
+      .language-html > div,
+      .language-css > div,
+      .language-scss > div,
+      .language-js > div {
+        color: #fff;
+        padding: 30px 20px;
+        background: #2f303b;
+      }
+
+      code.language-bash div {
+        margin-top: -20px;
+        padding: 30px 20px;
+        font-size: 1rem;
+        color: #ffffff;
+        background: #2f303b;
+        box-sizing: border-box;
+      }
+
+      code::after {
+        content: "";
+        display: block;
+      }
+
+      code.code-inlineBlock::after {
+        content: "";
+        display: inline-block;
+      }
+
+      .excute-text {
+        font-size: 0.8rem;
+        font-weight: bold;
+        color: #ed234b;
+      }
+
+      /* 좌, 우 여백 */
+
+      ol,
+      ul {
+        margin: 20px;
+        padding: 20px;
+        background: #f2f2f2;
+      }
+
+      ol li {
+        margin-left: 15px;
+      }
+
+      li {
+        font-size: 0.85rem;
+      }
+
+      p {
+        font-size: 0.85rem;
+      }
+
+      h4,
+      h5,
+      h6,
+      p,
+      img,
+      pre {
+        padding: 0 20px;
+      }
+
+      h4 {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2 id="case9--login---출제자-해설코드">Case9 : Login - 출제자 해설코드</h2>
+    <pre><code class="language-html"><div><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;en&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;UTF-8&quot;</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;viewport&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;width=device-width, initial-scale=1.0&quot;</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>03-login (solution)<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">link</span>
+      <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&amp;display=swap&quot;</span>
+      <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span>
+    /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;reset.css&quot;</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;solution.css&quot;</span> /&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;login-container&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;login&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;login-logo&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;./images/fastcampus-logo.png&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;fastcampus logo&quot;</span> /&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;login-title&quot;</span>&gt;</span>
+          인생을 바꾸는 교육,<span class="hljs-tag">&lt;<span class="hljs-name">br</span> /&gt;</span>
+          패스트 캠퍼스.
+        <span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+
+        <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;login-form-container&quot;</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;login-form-input-container&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;login-form-input&quot;</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&quot;아이디&quot;</span> /&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">input</span>
+              <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;password&quot;</span>
+              <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;login-form-input&quot;</span>
+              <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&quot;비밀번호&quot;</span>
+            /&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;login-option-container&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;login-form-checkbox-container&quot;</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">input</span>
+                <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;checkbox&quot;</span>
+                <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;login-form-checkbox&quot;</span>
+                <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;auto-login&quot;</span>
+              /&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;auto-login&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;login-form-checkbox-label&quot;</span>&gt;</span>
+                자동 로그인
+              <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;login-find-password-container&quot;</span>&gt;</span>
+              <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;login-find-password-link&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;#&quot;</span>&gt;</span>비밀번호 찾기<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;login-button-container&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;login-button&quot;</span>&gt;</span>로그인<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+          <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;login-signup-container&quot;</span>&gt;</span>
+            아직 계정이 없으신가요?
+            <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;#&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;login-signup-link&quot;</span>&gt;</span>간편 회원가입<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+
+</div></code></pre>
+    <pre><code class="language-scss"><div><span class="hljs-comment">// figma : https://www.figma.com/file/9FXkniEMPgZKtJY4GwP60z/Input?node-id=0%3A3</span>
+
+<span class="hljs-comment">// color palette</span>
+<span class="hljs-variable">$gray1</span>: <span class="hljs-number">#333333</span>;
+<span class="hljs-variable">$gray2</span>: <span class="hljs-number">#4f4f4f</span>;
+<span class="hljs-variable">$gray3</span>: <span class="hljs-number">#828282</span>;
+<span class="hljs-variable">$gray4</span>: <span class="hljs-number">#bdbdbd</span>;
+<span class="hljs-variable">$gray5</span>: <span class="hljs-number">#e0e0e0</span>;
+<span class="hljs-variable">$gray6</span>: <span class="hljs-number">#f2f2f2</span>;
+<span class="hljs-variable">$gray7</span>: <span class="hljs-number">#f9f9f9</span>;
+<span class="hljs-variable">$primary</span>: <span class="hljs-number">#ed234b</span>;
+
+<span class="hljs-comment">// color variable rename</span>
+<span class="hljs-variable">$text-color</span>: <span class="hljs-variable">$gray1</span>;
+<span class="hljs-variable">$input-text-color</span>: <span class="hljs-variable">$gray2</span>;
+<span class="hljs-variable">$placeholder-text-color</span>: <span class="hljs-variable">$gray4</span>;
+<span class="hljs-variable">$border-color</span>: <span class="hljs-variable">$gray5</span>;
+<span class="hljs-variable">$border-focus-color</span>: <span class="hljs-variable">$gray1</span>;
+<span class="hljs-variable">$button-primary-color</span>: <span class="hljs-variable">$primary</span>;
+
+<span class="hljs-comment">// default</span>
+<span class="hljs-selector-tag">html</span>,
+<span class="hljs-selector-tag">body</span> {
+  <span class="hljs-attribute">font-family</span>: <span class="hljs-string">&quot;Noto Sans KR&quot;</span>, sans-serif;
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">14px</span>;
+  <span class="hljs-attribute">line-height</span>: <span class="hljs-number">20px</span>;
+  <span class="hljs-attribute">color</span>: <span class="hljs-variable">$text-color</span>;
+}
+
+<span class="hljs-selector-class">.login-container</span> {
+  <span class="hljs-attribute">display</span>: flex;
+  <span class="hljs-attribute">justify-content</span>: center;
+  <span class="hljs-attribute">align-items</span>: center;
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">100vh</span>;
+
+  <span class="hljs-selector-class">.login</span> {
+    <span class="hljs-attribute">border</span>: <span class="hljs-number">1px</span> solid <span class="hljs-variable">$border-color</span>;
+    <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">8px</span>;
+    <span class="hljs-attribute">padding</span>: <span class="hljs-number">60px</span> <span class="hljs-number">50px</span>;
+    <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+    <span class="hljs-attribute">max-width</span>: <span class="hljs-number">500px</span>;
+
+    <span class="hljs-selector-class">.login-title</span> {
+      <span class="hljs-attribute">font-size</span>: <span class="hljs-number">30px</span>;
+      <span class="hljs-attribute">color</span>: black;
+      <span class="hljs-attribute">line-height</span>: <span class="hljs-number">43px</span>;
+      <span class="hljs-attribute">margin</span>: <span class="hljs-number">16px</span> <span class="hljs-number">0</span> <span class="hljs-number">56px</span>;
+    }
+
+    <span class="hljs-selector-class">.login-form-container</span> {
+      <span class="hljs-attribute">display</span>: flex;
+      <span class="hljs-attribute">flex-direction</span>: column;
+
+      <span class="hljs-selector-class">.login-form-input-container</span> {
+        <span class="hljs-attribute">display</span>: flex;
+        <span class="hljs-attribute">flex-direction</span>: column;
+
+        <span class="hljs-selector-class">.login-form-input</span> {
+          <span class="hljs-attribute">border</span>: <span class="hljs-number">1px</span> solid <span class="hljs-variable">$border-color</span>;
+          <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">4px</span>;
+          <span class="hljs-attribute">padding</span>: <span class="hljs-number">16px</span>;
+          <span class="hljs-attribute">color</span>: <span class="hljs-variable">$input-text-color</span>;
+          <span class="hljs-attribute">outline</span>: none;
+
+          &amp;::placeholder {
+            color: <span class="hljs-variable">$placeholder-text-color</span>;
+          }
+
+          &amp;<span class="hljs-selector-pseudo">:focus</span> {
+            <span class="hljs-attribute">border</span>: <span class="hljs-number">1px</span> solid <span class="hljs-variable">$border-focus-color</span>;
+          }
+
+          &amp;<span class="hljs-selector-pseudo">:not</span>(<span class="hljs-selector-pseudo">:last-child</span>) {
+            <span class="hljs-attribute">margin-bottom</span>: <span class="hljs-number">12px</span>;
+          }
+        }
+      }
+
+      <span class="hljs-selector-class">.login-option-container</span> {
+        <span class="hljs-attribute">display</span>: flex;
+        <span class="hljs-attribute">justify-content</span>: space-between;
+        <span class="hljs-attribute">margin</span>: <span class="hljs-number">18px</span> <span class="hljs-number">0</span> <span class="hljs-number">42px</span>;
+
+        <span class="hljs-comment">// 기본 HTML 체크박스 대신 이미지 활용</span>
+        <span class="hljs-selector-class">.login-form-checkbox-container</span> {
+          <span class="hljs-selector-class">.login-form-checkbox</span> {
+            <span class="hljs-attribute">display</span>: none;
+
+            + <span class="hljs-selector-tag">label</span> {
+              <span class="hljs-attribute">background</span>: url(<span class="hljs-string">&quot;./images/checkbox-default.png&quot;</span>) no-repeat;
+              <span class="hljs-attribute">height</span>: <span class="hljs-number">16px</span>;
+              <span class="hljs-attribute">display</span>: inline-block;
+              <span class="hljs-attribute">padding-left</span>: <span class="hljs-number">22px</span>;
+              <span class="hljs-attribute">line-height</span>: <span class="hljs-number">16px</span>;
+            }
+
+            &amp;<span class="hljs-selector-pseudo">:checked</span> + <span class="hljs-selector-tag">label</span> {
+              <span class="hljs-attribute">background</span>: url(<span class="hljs-string">&quot;./images/checkbox-checked.png&quot;</span>) no-repeat;
+            }
+          }
+        }
+
+        <span class="hljs-selector-class">.login-find-password-container</span> {
+          <span class="hljs-selector-class">.login-find-password-link</span> {
+            <span class="hljs-attribute">text-decoration</span>: none;
+            <span class="hljs-attribute">color</span>: <span class="hljs-variable">$text-color</span>;
+          }
+        }
+      }
+
+      <span class="hljs-selector-class">.login-button-container</span> {
+        <span class="hljs-selector-class">.login-button</span> {
+          <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+          <span class="hljs-attribute">height</span>: <span class="hljs-number">48px</span>;
+          <span class="hljs-attribute">line-height</span>: <span class="hljs-number">48px</span>;
+          <span class="hljs-attribute">color</span>: white;
+          <span class="hljs-attribute">border</span>: none;
+          <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">4px</span>;
+          <span class="hljs-attribute">font-size</span>: <span class="hljs-number">16px</span>;
+          <span class="hljs-attribute">background</span>: <span class="hljs-variable">$button-primary-color</span>;
+          <span class="hljs-attribute">font-weight</span>: bold;
+          <span class="hljs-attribute">outline</span>: none;
+        }
+      }
+
+      <span class="hljs-selector-class">.login-signup-container</span> {
+        <span class="hljs-attribute">margin-top</span>: <span class="hljs-number">32px</span>;
+        <span class="hljs-attribute">text-align</span>: center;
+
+        <span class="hljs-selector-class">.login-signup-link</span> {
+          <span class="hljs-attribute">color</span>: <span class="hljs-variable">$text-color</span>;
+          <span class="hljs-attribute">font-weight</span>: bold;
+        }
+      }
+    }
+  }
+}
+
+<span class="hljs-keyword">@media</span> screen <span class="hljs-keyword">and</span> (max-width: <span class="hljs-number">769px</span>) {
+  <span class="hljs-selector-class">.login-container</span> {
+    <span class="hljs-attribute">align-items</span>: flex-start;
+
+    <span class="hljs-selector-class">.login</span> {
+      <span class="hljs-attribute">border</span>: none;
+      <span class="hljs-attribute">padding</span>: <span class="hljs-number">40px</span> <span class="hljs-number">20px</span>;
+
+      <span class="hljs-selector-class">.login-title</span> {
+        <span class="hljs-attribute">font-size</span>: <span class="hljs-number">24px</span>;
+        <span class="hljs-attribute">line-height</span>: <span class="hljs-number">35px</span>;
+        <span class="hljs-attribute">margin</span>: <span class="hljs-number">16px</span> <span class="hljs-number">0</span> <span class="hljs-number">40px</span>;
+      }
+    }
+  }
+}
+
+</div></code></pre>
+    <h3 id="-case9--login--문제와-같이-보면-좋은-팁">
+      &lt; Case9 : Login &gt; 문제와 같이 보면 좋은 팁
+    </h3>
+    <p>
+      다른강사님께서 해당 출제문제를 본 후, 같이 확인하면 좋겠다고 주신
+      의견입니다.
+    </p>
+    <h4 id="html">HTML</h4>
+    <p>
+      로그인과 같은 웹페이지에는 <code class="code-inlineBlock">&lt;input&gt;</code> 요소가 많이 사용되고
+      있습니다. 이때 아이디 또는 이메일 주소 그리고 비밀번호 등이 기본적으로
+      요구되는 값의 유형일 것입니다.
+    </p>
+    <p>
+      이런 유형의 경우 일번적인 아이디는 type=”text”, 이메일 유형의 아이디는
+      type=”email”, 비밀번호는 type=”password”를 사용하는 것이 좋습니다.
+    </p>
+    <p>
+      특히 type=”email” 유형의 경우 HTML5에 새롭게 등장한 값으로 입력 값이
+      이메일 형식이 아니면 오류 메시지를 보여줍니다.
+    </p>
+    <p>
+      <code class="code-inlineBlock">&lt;input&gt;</code> 요소나 type=”email” 값의 경우 자세한 설명이나
+      사용 사럐는 아래 MDN을 참고하시기 바랍니다.
+      <a href="https://developer.mozilla.org/ko/docs/Web/HTML/Element/Input"
+        >https://developer.mozilla.org/ko/docs/Web/HTML/Element/Input</a
+      >
+      <a
+        href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/email"
+        >https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/email</a
+      >
+    </p>
+    <p>
+      또한 입력 값이 필수인지 아닌지 이해할 수 있도록 HTML5의 required 속성을
+      사용하는 것도 도움이 될 수 있습니다. 만약 required 속성을 사용하지 못하는
+      상황이라면 스크린리더 사용자들이 해당 입력 값이 필수임을 인지할 수 있도록
+      aria-required 속성을 사용하는 것이 도움이 됩니다.
+    </p>
+    <p>
+      대다수의 개발자들이 해당 정보가 필수임을 시각적으로만 표현하려 하지만
+      화면을 볼 수 없는 보조기기 등의 사용자를 고려하여 프로그래밍 적 해결책을
+      찾는 것 또한 중요할 수 있다는 점을 잊지 마시기 바랍니다.
+    </p>
+    <p>
+      <a href="https://www.w3.org/TR/WCAG20-TECHS/ARIA2.html"
+        >https://www.w3.org/TR/WCAG20-TECHS/ARIA2.html</a
+      >
+      <a
+        href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-required_attribute"
+        >https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-required_attribute</a
+      >
+    </p>
+    <h4 id="css">CSS</h4>
+    <p>
+      체크박스와 같은 경우 대다수 커스텀 디자인을 선호합니다. 디자인 시안을
+      바탕으로 구현하기 위해서는 체크박스 커스텀이 필수일 수 있습니다.
+    </p>
+    <p>
+      다만 디자인에만 초점을 맞추다보면 키보드 접근이 불가한 경우를 종종 볼 수
+      있는데 이는 웹접근성 관점을 고려하지 않은 제작 방식이라 할 수 있습니다.
+    </p>
+    <p>
+      커스텀 체크박스 디자인의 핵샘은 체크박스 입력서식인
+      <code class="code-inlineBlock">&lt;input&gt;</code> 요소에 display: none을 적용하지 않는 것입니다.
+    </p>
+    <p>
+      많은 개발자가 <code class="code-inlineBlock">&lt;input&gt;</code> 요소에 display: none;을 적용한 후
+      <code class="code-inlineBlock">&lt;label&gt;</code> 등의 요소에 커스텀 체크박스를 배경이미지로
+      사용합니다. 그러나 이렇게 개발할 경우 키보드 접근과 조작 자체가 불가능해
+      집니다.
+    </p>
+    <p>
+      그렇다면 어떤 방법을 사용하면 키보드로도 접근 및 조작 가능한 커스텀
+      체크박스를 만들 수 있을까요? <code class="code-inlineBlock">&lt;input&gt;</code> 요소에 display:
+      none 대신 다음과 같은 트릭을 활용할 수 있습니다.
+    </p>
+    <pre><code class="language-css"><div><span class="hljs-selector-class">.login-form-checkbox</span> {
+  <span class="hljs-attribute">opacity</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">16px</span>;
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">16px</span>;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">position</span>: absolute;
+  <span class="hljs-attribute">z-index</span>: <span class="hljs-number">100</span>;
+  <span class="hljs-attribute">background</span>: transparent;
+  <span class="hljs-attribute">cursor</span>: pointer;
+}
+</div></code></pre>
+    <p>
+      이제 키보드로 접근하여 스페이스 키를 눌러보면
+      <code class="code-inlineBlock">&lt;label&gt;</code> 요소에 미리 적용된 배경이미지가 변경되는 것을
+      확인할 수 있습니다.
+    </p>
+    <p>그렇지만 여기서도 문제가 발생합니다.</p>
+    <p>
+      아이디나 비밀번화 같은 입력서식과 달리 체크박스 입력서식은 opacity: 0을
+      지정했기 때문에 키보드가 접근하긴 하지만 포커스가 시각적으로 표시되지
+      않습니다.
+    </p>
+    <p>
+      이 문제를 해결하기 위해 .login-form-checkbox:focus + label 요소를 선택자로
+      활용하여 아웃라인 디자인을 추가할 수 있습니다.
+    </p>
+    <p>
+      다만 이 경우 레이블 전체에 아웃라인이 발생하기 때문에 체크박스 배경에만
+      적용하고자 할 경우 배경이미지를 <code class="code-inlineBlock">&lt;label&gt;</code> 요소 자체가
+      아닌 다른 요소에 적용하는 것이 도움이 됩니다.
+    </p>
+    <p>
+      다른 요소에 배경을 적용할 때 아래와 같은 형태의 마크업을 구성하여 문제를
+      해결해 보시기 바랍니다.
+    </p>
+    <pre><code class="language-html"><div><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;login-form-checkbox-container&quot;</span>&gt;</span>
+ <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;checkbox&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;login-form-checkbox&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;auto-login&quot;</span>&gt;</span>
+ <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;custom-checkbox&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+ <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;auto-login&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;login-form-checkbox-label&quot;</span>&gt;</span>자동로그인<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</div></code></pre>
+    <p>
+      간혹 실무에서 커스텀 체크박스 제작을 위해
+      <code class="code-inlineBlock">&lt;input&gt;</code> 요소가 아닌 <code class="code-inlineBlock">&lt;span&gt;</code> 등의
+      요소를 사용하는 경우가 있습니다.<br />이 경우 키보드 접근을 위해
+      tabindex=”0과 ”WAI-ARIA의 role=”checkbox”를 활용하여 키보드 사용자나
+      보조기기 사용자가 이를 이해하고 조작하게 할 수도 있습니다.
+    </p>
+    <p>
+      그러나 <code class="code-inlineBlock">&lt;input&gt;</code>이 아닌 <code class="code-inlineBlock">&lt;span&gt;</code> 등의
+      요소를 사용할 경우 입력값에 대한 처리나 마우스 및 키보드 관련 조작 기능을
+      모두 자바스크립트에서 처리를 해야한다는 것을 기억하시기 바랍니다.
+    </p>
+    <p>
+      role=”checkbox”에 대한 참고사이트는 MDN을 살펴보시기 바랍니다.
+      <a
+        href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/checkbox_role"
+        >https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/checkbox_role</a
+      >
+    </p>
+  </body>
+</html>

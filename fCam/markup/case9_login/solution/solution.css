@@ -1,0 +1,107 @@
+html,
+body {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  color: #333333;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.login-container .login {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 60px 50px;
+  width: 100%;
+  max-width: 500px;
+}
+.login-container .login .login-title {
+  font-size: 30px;
+  color: black;
+  line-height: 43px;
+  margin: 16px 0 56px;
+}
+.login-container .login .login-form-container {
+  display: flex;
+  flex-direction: column;
+}
+.login-container .login .login-form-container .login-form-input-container {
+  display: flex;
+  flex-direction: column;
+}
+.login-container .login .login-form-container .login-form-input-container .login-form-input {
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 16px;
+  color: #4f4f4f;
+  outline: none;
+}
+.login-container .login .login-form-container .login-form-input-container .login-form-input::placeholder {
+  color: #bdbdbd;
+}
+.login-container .login .login-form-container .login-form-input-container .login-form-input:focus {
+  border: 1px solid #333333;
+}
+.login-container .login .login-form-container .login-form-input-container .login-form-input:not(:last-child) {
+  margin-bottom: 12px;
+}
+.login-container .login .login-form-container .login-option-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 18px 0 42px;
+}
+.login-container .login .login-form-container .login-option-container .login-form-checkbox-container .login-form-checkbox {
+  display: none;
+}
+.login-container .login .login-form-container .login-option-container .login-form-checkbox-container .login-form-checkbox + label {
+  background: url("./images/checkbox-default.png") no-repeat;
+  height: 16px;
+  display: inline-block;
+  padding-left: 22px;
+  line-height: 16px;
+}
+.login-container .login .login-form-container .login-option-container .login-form-checkbox-container .login-form-checkbox:checked + label {
+  background: url("./images/checkbox-checked.png") no-repeat;
+}
+.login-container .login .login-form-container .login-option-container .login-find-password-container .login-find-password-link {
+  text-decoration: none;
+  color: #333333;
+}
+.login-container .login .login-form-container .login-button-container .login-button {
+  width: 100%;
+  height: 48px;
+  line-height: 48px;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  background: #ed234b;
+  font-weight: bold;
+}
+.login-container .login .login-form-container .login-signup-container {
+  margin-top: 32px;
+  text-align: center;
+}
+.login-container .login .login-form-container .login-signup-container .login-signup-link {
+  color: #333333;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 769px) {
+  .login-container {
+    align-items: flex-start;
+  }
+  .login-container .login {
+    border: none;
+    padding: 40px 20px;
+  }
+  .login-container .login .login-title {
+    font-size: 24px;
+    line-height: 35px;
+    margin: 16px 0 40px;
+  }
+}

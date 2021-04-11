@@ -1,0 +1,91 @@
+@charset "UTF-8";
+
+/* reset */
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+*:focus {
+    outline: none;
+}
+
+html,
+body {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+h1 {
+    text-align: center;
+    margin: 35px auto 0;
+}
+
+
+/* mixin */
+
+
+/* mixin은 선택사항입니다. 편한 형식으로 먼저 작성 후에 도전해보세요. */
+
+
+/* pc */
+
+.flex_wrap {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    /* type here */
+    width: 100%;
+    max-width: 1024px;
+    margin: 40px auto;
+    padding: 40px;
+    background-color: #fafafa;
+    counter-reset: items;
+    /* type here */
+}
+
+.flex_wrap .item {
+    /* type here */
+    position: relative;
+    height: 140px;
+    margin-bottom: 10px;
+    padding: 15px;
+    box-shadow: 14px 17px 34px -20px rgba(0, 0, 0, 0.75);
+    color: #000;
+    box-sizing: border-box;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.flex_wrap .item img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate3d(-50%, -50%, 0);
+    transform: translate3d(-50%, -50%, 0);
+}
+
+.flex_wrap .item:before {
+    counter-increment: items;
+    content: counter(items);
+    position: relative;
+    z-index: 1;
+    color: #fff;
+}
+
+@media (max-width: 1024px) {
+    /* type here */
+}
+
+@media (max-width: 767px) {
+    /* type here */
+}
+
+@media (max-width: 480px) {
+    /* type here */
+}

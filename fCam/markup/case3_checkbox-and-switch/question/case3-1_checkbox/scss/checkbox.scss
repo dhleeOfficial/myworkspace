@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+/* reset */
+*{font-weight:500;font-family:"Noto Sans KR";color:#625F67}
+input[type="checkbox"]{margin:0}
+
+/* sprite */
+.ico_comm{display:inline-block;overflow:hidden;font-size:0;line-height:0;background:url(../images/ico_comm.png) no-repeat 0 0;text-indent:-9999px;vertical-align:top}
+.ico_choice{width:18px;height:18px;background-position:0 0}
+
+/* content */
+.box_choice{margin:20px 0}
+.tit_choice{display:block;margin:10px 0}
+
+/* checkbox */
+/* checkbox 스타일 작성 영역 */

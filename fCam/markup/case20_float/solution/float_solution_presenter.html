@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Case20 : Float - 출제자 해설코드</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css"
+    />
+    <style>
+      /*
+      ==================== html => MD 작업 시, 꼭! 확인해주세요. ====================
+      1. Markdown All in One : Print current document to HTML 실행. (VScode extension)
+      2. 생성된 README.html에서 body 태그 안에 있는것들을 복사
+      3. 루트 폴더에 README_OOO.md 생성 (OOO : Case 이름)
+      4. ! 자동완성을 통해 기본 html 폼을 만들고, body태그 안에 <2>의 내용 붙여넣기
+      5. font / code style에 관련된 <link>세줄과 <style> 태그 안에 있는 내용 붙여넣기
+      6. 상단 <title> 태그 안에 <h2> 텍스트 삽입
+      7. <code> tag가 줄바꿈 될 때, class명으로 "code-inlineBlock" 넣어주기
+      8. <img>태그 경로 변경해주기
+      [ EXAMPLE ]
+      [ 변경 전 ] : 절대경로로 되어있음
+      <img
+          width="600px"
+          src="file:////Users/ming/Desktop/ui-component/case2_InfiniteScroll/example_image.gif"
+        />
+      [ 변경 후 ] : 상대경로로 수정
+      <img
+          width="600px"
+          src="./example_image.gif"
+        />
+      8. html 내에 <h3>실행 방법 및 의존성 모듈 설치</h3> 하위 내용 아래와 같이 수정
+      [ EXAMPLE ]
+      [ 변경 전 ] : p에 className 없음
+        <p>
+          <strong>q1</strong>
+          경로
+          <code>./question/q1_js</code>
+          index.html 열기
+        </p>
+      [ 변경 후 ] : p에 className 있음
+        <p>
+          <strong>q1</strong>
+          경로
+          <code>./question/q1_js</code>
+          <p class="excute-text">index.html 열기</p>
+        </p>
+
+
+      [ 변경 전 ] : p태그와 pre태그가 div로 감싸져있지 않음
+        <p>
+          <strong>q4</strong>
+          경로
+          <code>./question/q4_react.js</code>
+        </p>
+
+        <p>터미널</p>
+        <pre><code class="language-bash"><div>  $ npm install
+        $ npm start
+      </div></code></pre>
+
+      [ 변경 후 ] : p태그와 pre태그가 div.code-wrap 으로 감싸져있음
+        <p>
+          <strong>q4</strong>
+          경로
+          <code>./question/q4_react.js</code>
+        </p>
+
+        <div class="code-wrap">
+        <p>터미널</p>
+        <pre>
+          <code class="language-bash"><div>  $ npm install
+      $ npm start
+    </div></code></pre>
+    </div>
+    */
+
+      html {
+        overflow-x: hidden;
+      }
+
+      body {
+        font-family: "Noto Sans KR", sans-serif;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      ul,
+      ol,
+      li,
+      dl,
+      dt,
+      dd,
+      p,
+      table {
+        margin: 0;
+        padding: 0;
+        color: #494949;
+        letter-spacing: -0.025rem;
+        box-sizing: border-box;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-weight: 600;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: inherit;
+      }
+
+      a img {
+        border: none;
+      }
+
+      img {
+        max-width: 100%;
+        vertical-align: middle;
+      }
+
+      ul li {
+        list-style: none;
+      }
+
+      p {
+        line-height: 1.8;
+      }
+
+      /* STYLE */
+
+      body {
+        padding: 0;
+        margin: 0;
+        line-height: 1.6;
+      }
+
+      h2 {
+        padding: 50px 0;
+        color: #ffffff;
+        font-size: 2rem;
+        text-align: center;
+        background: linear-gradient(45deg, #ed234b, #ff6c89, #ff6fb7);
+      }
+
+      h2::before {
+        content: "#";
+        display: inline-block;
+        margin-right: 5px;
+        color: #ff9db0;
+        font-weight: 300;
+        font-size: 2.2rem;
+      }
+
+      h3 {
+        position: relative;
+        margin: 30px 20px;
+        padding-bottom: 15px;
+        color: #303030;
+        font-size: 1.6rem;
+        border-bottom: 1px solid #ededed;
+      }
+
+      blockquote {
+        margin: 20px;
+        padding: 20px;
+        background: #f2f2f2;
+      }
+
+      strong {
+        display: block;
+        margin-top: 10px;
+      }
+
+      .code-wrap {
+        position: relative;
+        background: #2f303b;
+        margin: 15px 0 0 0;
+      }
+
+      .code-wrap > p {
+        position: absolute;
+        left: 0;
+        top: 0;
+        padding: 2px 15px;
+        font-size: 0.7rem;
+        color: #ffffff;
+        text-align: center;
+        background: #61c8cc;
+      }
+
+      code {
+        background: #ededed;
+      }
+
+      .language-html > div,
+      .language-css > div,
+      .language-scss > div,
+      .language-js > div {
+        color: #fff;
+        padding: 30px 20px;
+        background: #2f303b;
+      }
+
+      code.language-bash div {
+        margin-top: -20px;
+        padding: 30px 20px;
+        font-size: 1rem;
+        color: #ffffff;
+        background: #2f303b;
+        box-sizing: border-box;
+      }
+
+      code::after {
+        content: "";
+        display: block;
+      }
+
+      code.code-inlineBlock::after {
+        content: "";
+        display: inline-block;
+      }
+
+      .excute-text {
+        font-size: 0.8rem;
+        font-weight: bold;
+        color: #ed234b;
+      }
+
+      ol > li > ul,
+      ul > li > ul {
+        background: #ffffff;
+      }
+
+      /* 좌, 우 여백 */
+
+      ol,
+      ul {
+        margin: 20px;
+        padding: 20px;
+        background: #f2f2f2;
+      }
+
+      ol li {
+        margin-left: 15px;
+      }
+
+      li {
+        font-size: 0.85rem;
+      }
+
+      h4,
+      h5,
+      h6,
+      p,
+      img,
+      pre {
+        padding: 0 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h2 id="case20--float---출제자-해설코드">
+      Case20 : Float - 출제자 해설코드
+    </h2>
+    <pre><code class="language-html"><div><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;en&quot;</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;UTF-8&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;viewport&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>4-1 Float (solution)<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;solution.css&quot;</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>float<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;float_wrap&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;item_wrap&quot;</span>&gt;</span>
+            <span class="hljs-comment">&lt;!-- 각 레이아웃이 나눠지는 만큼 큰 덩어리 단위로 우선 구분지어줍니다. --&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;item large&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;./img/box_1.jpg&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;&quot;</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-comment">&lt;!-- 큰 덩어리 단위로 감싸야 하는 이유가 충분하다면 감싸야합니다. --&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;item_child_wrap&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;item small&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;./img/box_2.jpg&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;&quot;</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;item small&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;./img/box_3.jpg&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;&quot;</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;item large&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;./img/box_4.jpg&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;item_wrap&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;item_child_wrap&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;item half small&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;./img/box_5.jpg&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;&quot;</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;item half small&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;./img/box_6.jpg&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;&quot;</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;item small w-100&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;./img/box_7.jpg&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;&quot;</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;item large&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;./img/box_8.jpg&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</div></code></pre>
+    <pre><code class="language-scss"><div><span class="hljs-keyword">@charset</span> <span class="hljs-string">&quot;utf-8&quot;</span>;
+
+<span class="hljs-comment">/* variables */</span>
+
+<span class="hljs-variable">$w100</span>: <span class="hljs-number">100%</span>;
+<span class="hljs-variable">$half</span>: <span class="hljs-number">50%</span>;
+<span class="hljs-variable">$third</span>: <span class="hljs-number">33.33%</span>;
+<span class="hljs-variable">$large_box</span>: <span class="hljs-number">300px</span>;
+<span class="hljs-variable">$small_box</span>: <span class="hljs-number">150px</span>;
+<span class="hljs-variable">$basis_space</span>: <span class="hljs-number">40px</span>;
+<span class="hljs-variable">$padding</span>: <span class="hljs-number">15px</span>;
+<span class="hljs-variable">$box-shadow</span>: <span class="hljs-number">14px</span> <span class="hljs-number">17px</span> <span class="hljs-number">34px</span> -<span class="hljs-number">20px</span> rgba(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0.75</span>);
+
+<span class="hljs-comment">/* reset */</span>
+
+*,
+*<span class="hljs-selector-pseudo">:before</span>,
+*<span class="hljs-selector-pseudo">:after</span> {
+    <span class="hljs-attribute">box-sizing</span>: border-box;
+}
+
+*<span class="hljs-selector-pseudo">:focus</span> {
+    <span class="hljs-attribute">outline</span>: none;
+}
+
+<span class="hljs-selector-tag">html</span>,
+<span class="hljs-selector-tag">body</span> {
+    <span class="hljs-attribute">position</span>: relative;
+    <span class="hljs-attribute">width</span>: <span class="hljs-variable">$w100</span>;
+    <span class="hljs-attribute">height</span>: <span class="hljs-variable">$w100</span>;
+    <span class="hljs-attribute">padding</span>: <span class="hljs-number">0</span>;
+    <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;
+}
+
+<span class="hljs-selector-tag">h1</span> {
+    <span class="hljs-attribute">text-align</span>: center;
+    <span class="hljs-attribute">margin</span>: <span class="hljs-number">35px</span> auto <span class="hljs-number">0</span>;
+}
+
+<span class="hljs-selector-class">.float_wrap</span> {
+    <span class="hljs-attribute">display</span>: block;
+    <span class="hljs-attribute">width</span>: <span class="hljs-variable">$w100</span>;
+    <span class="hljs-attribute">max-width</span>: <span class="hljs-number">1024px</span>;
+    <span class="hljs-attribute">margin</span>: <span class="hljs-variable">$basis_space</span> auto;
+    <span class="hljs-attribute">padding</span>: <span class="hljs-variable">$basis_space</span>;
+    <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#fafafa</span>;
+    <span class="hljs-attribute">counter-reset</span>: items;
+    <span class="hljs-selector-class">.item_wrap</span> {
+        <span class="hljs-attribute">display</span>: block;
+        <span class="hljs-comment">/* float을 해제하는 방법들은 다양합니다. */</span>
+        &amp;<span class="hljs-selector-pseudo">:after</span> {
+            <span class="hljs-attribute">content</span>: <span class="hljs-string">&#x27;&#x27;</span>;
+            <span class="hljs-attribute">display</span>: block;
+            <span class="hljs-attribute">clear</span>: both;
+        }
+        <span class="hljs-selector-class">.item</span> {
+            <span class="hljs-attribute">float</span>: left;
+            <span class="hljs-attribute">width</span>: <span class="hljs-variable">$third</span>;
+            <span class="hljs-attribute">position</span>: relative;
+            <span class="hljs-attribute">height</span>: <span class="hljs-variable">$small_box</span>;
+            <span class="hljs-attribute">padding</span>: <span class="hljs-variable">$padding</span>;
+            <span class="hljs-attribute">box-sizing</span>: border-box;
+            <span class="hljs-attribute">overflow</span>: hidden;
+            &amp;<span class="hljs-selector-class">.large</span> {
+                <span class="hljs-attribute">height</span>: <span class="hljs-variable">$large_box</span>;
+            }
+            &amp;<span class="hljs-selector-class">.small</span> {
+                <span class="hljs-attribute">height</span>: <span class="hljs-variable">$small_box</span>;
+            }
+            <span class="hljs-selector-tag">img</span> {
+                <span class="hljs-attribute">position</span>: absolute;
+                <span class="hljs-attribute">left</span>: <span class="hljs-variable">$half</span>;
+                <span class="hljs-attribute">top</span>: <span class="hljs-variable">$half</span>;
+                <span class="hljs-attribute">height</span>: <span class="hljs-number">100%</span>;
+                -webkit-<span class="hljs-attribute">transform</span>: translate3d(-<span class="hljs-variable">$half</span>, -<span class="hljs-variable">$half</span>, <span class="hljs-number">0</span>);
+                <span class="hljs-attribute">transform</span>: translate3d(-<span class="hljs-variable">$half</span>, -<span class="hljs-variable">$half</span>, <span class="hljs-number">0</span>);
+            }
+            &amp;<span class="hljs-selector-pseudo">:before</span> {
+                <span class="hljs-attribute">counter-increment</span>: items;
+                <span class="hljs-attribute">content</span>: counter(items);
+                <span class="hljs-attribute">position</span>: relative;
+                <span class="hljs-attribute">z-index</span>: <span class="hljs-number">1</span>;
+                <span class="hljs-attribute">color</span>: <span class="hljs-number">#fff</span>;
+            }
+        }
+        <span class="hljs-selector-class">.item_child_wrap</span> {
+            <span class="hljs-attribute">display</span>: block;
+            <span class="hljs-attribute">float</span>: left;
+            <span class="hljs-attribute">width</span>: <span class="hljs-variable">$third</span>;
+            <span class="hljs-selector-class">.item</span> {
+                <span class="hljs-attribute">float</span>: none;
+                <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+                &amp;<span class="hljs-selector-class">.half</span> {
+                    <span class="hljs-attribute">width</span>: <span class="hljs-variable">$half</span>;
+                }
+            }
+        }
+        &amp;<span class="hljs-selector-pseudo">:nth-of-type</span>(2) {
+            <span class="hljs-selector-class">.item_child_wrap</span> {
+                <span class="hljs-attribute">width</span>: <span class="hljs-number">66.66%</span>;
+                <span class="hljs-selector-class">.item</span> {
+                    <span class="hljs-attribute">float</span>: left;
+                }
+                <span class="hljs-selector-class">.w-100</span> <span class="hljs-selector-tag">img</span> {
+                    <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+                }
+            }
+            <span class="hljs-selector-class">.item</span><span class="hljs-selector-pseudo">:last-of-type</span> {
+                <span class="hljs-attribute">float</span>: right;
+            }
+        }
+    }
+}
+</div></code></pre>
+  </body>
+</html>

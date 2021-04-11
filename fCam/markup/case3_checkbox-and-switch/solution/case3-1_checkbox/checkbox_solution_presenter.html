@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case3-1 : checkbox - 출제자 해설코드</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css" />
+    <style>
+        /*
+      ==================== html => MD 작업 시, 꼭! 확인해주세요. ====================
+      1. Markdown All in One : Print current document to HTML 실행. (VScode extension)
+      2. 생성된 README.html에서 body 태그 안에 있는것들을 복사
+      3. README_OOO.html 로 파일명 수정 (OOO => Case 이름)
+      4. ! 자동완성을 통해 기본 html 폼을 만들고, body태그 안에 <2>의 내용 붙여넣기
+      5. font / code style에 관련된 <link>세줄과 <style> 태그 안에 있는 내용 붙여넣기
+      6. 상단 <title> 태그 안에 <h2> 텍스트 삽입
+      7. <code> tag가 줄바꿈 될 때, class명으로 "code-inlineBlock" 넣어주기
+      8. <img>태그 경로 변경해주기
+      [ EXAMPLE ]
+      [ 변경 전 ] : 절대경로로 되어있음
+      <img
+          width="600px"
+          src="file:////Users/ming/Desktop/ui-component/case2_InfiniteScroll/example_image.gif"
+        />
+      [ 변경 후 ] : 상대경로로 수정
+      <img
+          width="600px"
+          src="./example_image.gif"
+        />
+      8. html 내에 <h3>실행 방법 및 의존성 모듈 설치</h3> 하위 내용 아래와 같이 수정
+      [ EXAMPLE ]
+      [ 변경 전 ] : p에 className 없음
+        <p>
+          <strong>q1</strong>
+          경로
+          <code>./question/q1_js</code>
+          index.html 열기
+        </p>
+      [ 변경 후 ] : p에 className 있음
+        <p>
+          <strong>q1</strong>
+          경로
+          <code>./question/q1_js</code>
+          <p class="excute-text">index.html 열기</p>
+        </p>
+
+
+      [ 변경 전 ] : p태그와 pre태그가 div로 감싸져있지 않음
+        <p>
+          <strong>q4</strong>
+          경로
+          <code>./question/q4_react.js</code>
+        </p>
+
+        <p>터미널</p>
+        <pre><code class="language-bash"><div>  $ npm install
+        $ npm start
+      </div></code></pre>
+
+      [ 변경 후 ] : p태그와 pre태그가 div.code-wrap 으로 감싸져있음
+        <p>
+          <strong>q4</strong>
+          경로
+          <code>./question/q4_react.js</code>
+        </p>
+
+        <div class="code-wrap">
+        <p>터미널</p>
+        <pre>
+          <code class="language-bash"><div>  $ npm install
+      $ npm start
+    </div></code></pre>
+    </div>
+    */
+
+        html {
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: "Noto Sans KR", sans-serif;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        ul,
+        ol,
+        li,
+        dl,
+        dt,
+        dd,
+        p,
+        table {
+            margin: 0;
+            padding: 0;
+            color: #494949;
+            letter-spacing: -0.025rem;
+            box-sizing: border-box;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-weight: 600;
+        }
+
+        a {
+            text-decoration: inherit;
+            display: block;
+            color: #5e9cff;
+            text-decoration: underline;
+        }
+
+        a::before {
+            content: '📎';
+        }
+
+        a img {
+            border: none;
+        }
+
+        img {
+            max-width: 100%;
+            vertical-align: middle;
+        }
+
+        ul li {
+            list-style: none;
+        }
+
+        p {
+            line-height: 1.8;
+        }
+
+        /* STYLE */
+
+        body {
+            padding: 0;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        h2 {
+            padding: 50px 0;
+            color: #ffffff;
+            font-size: 2rem;
+            text-align: center;
+            background: linear-gradient(45deg, #ed234b, #ff6c89, #ff6fb7);
+        }
+
+        h2::before {
+            content: "#";
+            display: inline-block;
+            margin-right: 5px;
+            color: #ff9db0;
+            font-weight: 300;
+            font-size: 2.2rem;
+        }
+
+        h3 {
+            position: relative;
+            margin: 30px 20px;
+            padding-bottom: 15px;
+            color: #303030;
+            font-size: 1.6rem;
+            border-bottom: 1px solid #ededed;
+        }
+
+        blockquote {
+            margin: 20px;
+            padding: 20px;
+            background: #f2f2f2;
+        }
+
+        strong {
+            display: block;
+            margin-top: 10px;
+        }
+
+        .code-wrap {
+            position: relative;
+            background: #2f303b;
+            margin: 15px 0 0 0;
+        }
+
+        .code-wrap>p {
+            position: absolute;
+            left: 0;
+            top: 0;
+            padding: 2px 15px;
+            font-size: 0.7rem;
+            color: #ffffff;
+            text-align: center;
+            background: #61c8cc;
+        }
+
+        code {
+            background: #ededed;
+        }
+
+        .language-html>div,
+        .language-css>div,
+        .language-scss>div,
+        .language-js>div {
+            color: #fff;
+            padding: 30px 20px;
+            background: #2f303b;
+        }
+
+        code.language-bash div {
+            margin-top: -20px;
+            padding: 30px 20px;
+            font-size: 1rem;
+            color: #ffffff;
+            background: #2f303b;
+            box-sizing: border-box;
+        }
+
+        code::after {
+            content: "";
+            display: block;
+        }
+
+        code.code-inlineBlock::after {
+            content: "";
+            display: inline-block;
+        }
+
+        .excute-text {
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: #ed234b;
+        }
+
+        /* 좌, 우 여백 */
+
+        ol,
+        ul {
+            margin: 20px;
+            padding: 20px;
+            background: #f2f2f2;
+        }
+
+        ol li {
+            margin-left: 15px;
+        }
+
+        li {
+            font-size: 0.85rem;
+        }
+
+        p {
+            font-size: 0.85rem;
+        }
+
+        h4,
+        h5,
+        h6,
+        p,
+        img,
+        pre {
+            padding: 0 20px;
+        }
+
+        h4 {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2 id="case3--checkbox---출제자-해설">Case3-1 : checkbox - 출제자 해설코드</h2>
+    <pre><code class="language-html"><div><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;ko&quot;</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;UTF-8&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;viewport&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>check box<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&amp;display=swap&quot;</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;../css/checkbox.css&quot;</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;container-doc&quot;</span>&gt;</span>
+
+        <span class="hljs-comment">&lt;!-- icon 클래스 --&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;ico_comm ico_choice&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;box_choice&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">strong</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;tit_choice&quot;</span>&gt;</span>체크박스 단독 타입<span class="hljs-tag">&lt;/<span class="hljs-name">strong</span>&gt;</span>
+            
+            <span class="hljs-comment">&lt;!-- normal 타입 --&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;item_choice type_alone&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;checkbox&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;agreeChk1_1&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;inp_choice&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;agreeChk1_1&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;lab_choice&quot;</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;ico_comm ico_choice&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+            <span class="hljs-comment">&lt;!-- checked 타입 --&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;item_choice type_alone&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;checkbox&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;agreeChk1_2&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;inp_choice&quot;</span> <span class="hljs-attr">checked</span>=<span class="hljs-string">&quot;checked&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;agreeChk1_2&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;lab_choice&quot;</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;ico_comm ico_choice&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            
+            <span class="hljs-comment">&lt;!-- disabled 타입 --&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;item_choice type_alone&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;checkbox&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;agreeChk1_3&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;inp_choice&quot;</span> <span class="hljs-attr">disabled</span>=<span class="hljs-string">&quot;disabled&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;agreeChk1_3&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;lab_choice&quot;</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;ico_comm ico_choice&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+            <span class="hljs-comment">&lt;!-- checked, disabled 타입 --&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;item_choice type_alone&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;checkbox&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;agreeChk1_4&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;inp_choice&quot;</span> <span class="hljs-attr">checked</span>=<span class="hljs-string">&quot;checked&quot;</span> <span class="hljs-attr">disabled</span>=<span class="hljs-string">&quot;disabled&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;agreeChk1_4&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;lab_choice&quot;</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;ico_comm ico_choice&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;box_choice&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">strong</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;tit_choice&quot;</span>&gt;</span>체크박스 + 텍스트 타입<span class="hljs-tag">&lt;/<span class="hljs-name">strong</span>&gt;</span>
+
+            <span class="hljs-comment">&lt;!-- normal 타입 --&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;item_choice&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;checkbox&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;agreeChk2_1&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;inp_choice&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;agreeChk2_1&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;lab_choice&quot;</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;ico_comm ico_choice&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+                    normal
+                <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+            <span class="hljs-comment">&lt;!-- checked 타입 --&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;item_choice&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;checkbox&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;agreeChk2_2&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;inp_choice&quot;</span> <span class="hljs-attr">checked</span>=<span class="hljs-string">&quot;checked&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;agreeChk2_2&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;lab_choice&quot;</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;ico_comm ico_choice&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+                    checked
+                <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+            <span class="hljs-comment">&lt;!-- disabled 타입 --&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;item_choice&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;checkbox&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;agreeChk2_3&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;inp_choice&quot;</span> <span class="hljs-attr">disabled</span>=<span class="hljs-string">&quot;disabled&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;agreeChk2_3&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;lab_choice&quot;</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;ico_comm ico_choice&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+                    normal disabled
+                <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+            <span class="hljs-comment">&lt;!-- checked, disabled 타입 --&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;item_choice&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;checkbox&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;agreeChk2_4&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;inp_choice&quot;</span> <span class="hljs-attr">checked</span>=<span class="hljs-string">&quot;checked&quot;</span> <span class="hljs-attr">disabled</span>=<span class="hljs-string">&quot;disabled&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;agreeChk2_4&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;lab_choice&quot;</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;ico_comm ico_choice&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+                    checked disabled
+                <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;box_choice&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">strong</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;tit_choice&quot;</span>&gt;</span>체크박스 + 텍스트 2줄이상 길어진 타입<span class="hljs-tag">&lt;/<span class="hljs-name">strong</span>&gt;</span>
+            
+            <span class="hljs-comment">&lt;!-- normal 타입 --&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;item_choice&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;checkbox&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;agreeChk3_1&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;inp_choice&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;agreeChk3_1&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;lab_choice&quot;</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;ico_comm ico_choice&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+                    normal normal normal
+                <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+            <span class="hljs-comment">&lt;!-- checked 타입 --&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;item_choice&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;checkbox&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;agreeChk3_2&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;inp_choice&quot;</span> <span class="hljs-attr">checked</span>=<span class="hljs-string">&quot;checked&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;agreeChk3_2&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;lab_choice&quot;</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;ico_comm ico_choice&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+                    checked checked checked
+                <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+            <span class="hljs-comment">&lt;!-- disabled 타입 --&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;item_choice&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;checkbox&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;agreeChk3_3&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;inp_choice&quot;</span> <span class="hljs-attr">disabled</span>=<span class="hljs-string">&quot;disabled&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;agreeChk3_3&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;lab_choice&quot;</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;ico_comm ico_choice&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+                    normal disabled normal disabled normal disabled
+                <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+            <span class="hljs-comment">&lt;!-- checked, disabled 타입 --&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;item_choice&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;checkbox&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;agreeChk3_4&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;inp_choice&quot;</span> <span class="hljs-attr">checked</span>=<span class="hljs-string">&quot;checked&quot;</span> <span class="hljs-attr">disabled</span>=<span class="hljs-string">&quot;disabled&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;agreeChk3_4&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;lab_choice&quot;</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;ico_comm ico_choice&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+                    checked disabled checked disabled checked disabled
+                <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</div></code></pre>
+    <pre><code class="language-scss"><div><span class="hljs-keyword">@charset</span> <span class="hljs-string">&quot;UTF-8&quot;</span>;
+
+<span class="hljs-comment">/* reset */</span>
+*{<span class="hljs-attribute">font-weight</span>:<span class="hljs-number">500</span>;<span class="hljs-attribute">font-family</span>:<span class="hljs-string">&quot;Noto Sans KR&quot;</span>;<span class="hljs-attribute">color</span>:<span class="hljs-number">#625F67</span>}
+input[type=<span class="hljs-string">&quot;checkbox&quot;</span>]{margin:<span class="hljs-number">0</span>}
+
+/* sprite */
+.ico_comm{display:inline-block;<span class="hljs-attribute">overflow</span>:hidden;<span class="hljs-attribute">font-size</span>:<span class="hljs-number">0</span>;<span class="hljs-attribute">line-height</span>:<span class="hljs-number">0</span>;<span class="hljs-attribute">background</span>:url(../images/ico_comm.png) no-repeat <span class="hljs-number">0</span> <span class="hljs-number">0</span>;<span class="hljs-attribute">text-indent</span>:-<span class="hljs-number">9999px</span>;<span class="hljs-attribute">vertical-align</span>:top}
+.ico_choice{width:<span class="hljs-number">18px</span>;<span class="hljs-attribute">height</span>:<span class="hljs-number">18px</span>;<span class="hljs-attribute">background-position</span>:<span class="hljs-number">0</span> <span class="hljs-number">0</span>}
+
+/* content */
+.box_choice{margin:<span class="hljs-number">20px</span> <span class="hljs-number">0</span>}
+.tit_choice{display:block;<span class="hljs-attribute">margin</span>:<span class="hljs-number">10px</span> <span class="hljs-number">0</span>}
+
+/* checkbox */
+/* checkbox 스타일 작성 영역 */
+.item_choice{
+    display:inline-block;<span class="hljs-attribute">position</span>:relative;<span class="hljs-attribute">max-width</span>:<span class="hljs-number">150px</span>;<span class="hljs-attribute">vertical-align</span>:top;
+    <span class="hljs-selector-class">.inp_choice</span>{
+        <span class="hljs-attribute">position</span>:absolute;<span class="hljs-attribute">top</span>:<span class="hljs-number">0</span>;<span class="hljs-attribute">left</span>:<span class="hljs-number">0</span>;<span class="hljs-attribute">width</span>:<span class="hljs-number">18px</span>;<span class="hljs-attribute">height</span>:<span class="hljs-number">18px</span>;
+        appearance:none;-webkit-appearance:none;-moz-appearance:none;<span class="hljs-attribute">cursor</span>:pointer;
+        &amp;<span class="hljs-selector-pseudo">:checked</span> + <span class="hljs-selector-class">.lab_choice</span> <span class="hljs-selector-class">.ico_choice</span>{<span class="hljs-attribute">background-position</span>:-<span class="hljs-number">20px</span> <span class="hljs-number">0</span>;<span class="hljs-attribute">pointer-events</span>:none}
+        &amp;:disabled,
+        &amp;:checked:disabled{cursor:not-allowed}
+        &amp;:disabled + .lab_choice,
+        &amp;:checked:disabled + .lab_choice{cursor:not-allowed}
+        &amp;:disabled + .lab_choice .ico_choice{background-position:-<span class="hljs-number">40px</span> <span class="hljs-number">0</span>}
+        &amp;:checked:disabled + .lab_choice .ico_choice{background-position:-<span class="hljs-number">60px</span> <span class="hljs-number">0</span>}
+    }
+    .lab_choice{
+        display:block;<span class="hljs-attribute">position</span>:relative;<span class="hljs-attribute">padding-left</span>:<span class="hljs-number">26px</span>;<span class="hljs-attribute">font-size</span>:<span class="hljs-number">14px</span>;<span class="hljs-attribute">line-height</span>:<span class="hljs-number">18px</span>;<span class="hljs-attribute">cursor</span>:pointer;
+        <span class="hljs-selector-class">.ico_choice</span>{<span class="hljs-attribute">position</span>:absolute;<span class="hljs-attribute">top</span>:<span class="hljs-number">0</span>;<span class="hljs-attribute">left</span>:<span class="hljs-number">0</span>;<span class="hljs-attribute">background-color</span>:<span class="hljs-number">#fff</span>}
+    }
+    &amp;.type_alone .lab_choice{min-width:<span class="hljs-number">18px</span>;<span class="hljs-attribute">min-height</span>:<span class="hljs-number">18px</span>;<span class="hljs-attribute">padding-left</span>:<span class="hljs-number">0</span>}
+}
+</div></code></pre>
+    <h3 id="-case03--form-checkbox--문제와-같이-보면-좋은-팁">&lt; Case03 : Form checkbox &gt; 문제와 같이 보면 좋은 팁</h3>
+    <p>다른강사님께서 해당 출제문제를 본 후, 같이 확인하면 좋겠다고 주신 의견입니다.</p>
+    <h4 id="html">HTML</h4>
+    <ul>
+        <li>checkbox 단톡 타입의 경우 label 요소에 label 텍스트가 존재 하지 않는 구조이므로<br>
+            aria-label 속성을 활용하여 checkbox가 어떤 용도인지를 이해할 수 있도록 수정해보면 좋을 것 같습니다.
+            그 이유는 모든 입력 서식은 1대1로 대응되는 레이블이 필요하기 때문입니다.</li>
+    </ul>
+    <p><a
+            href="https://developer.mozilla.org/ko/docs/Web/HTML/Element/label">https://developer.mozilla.org/ko/docs/Web/HTML/Element/label</a>
+    </p>
+    <h4 id="css">CSS</h4>
+    <ul>
+        <li>
+            <p>CSS Sprite와 IR 기법도 함께 연결해서 생각해보면 좋을 것 같습니다.
+                그리고 현재 solution에서 사용하고 있는 text-indent를 활용한 IR기법의 경우 성능 저하를 불러올 수 있기에 다른 방법을 사용하여 수정하면 좋을 것 같습니다.
+                <a
+                    href="https://nuli.navercorp.com/community/article/1132804?email=true">https://nuli.navercorp.com/community/article/1132804?email=true</a>
+            </p>
+        </li>
+        <li>
+            <p>appearance 속성에 사용하는 vendor prefix의 경우 CSS 작업 시 일일이 부여하는 방식보다
+                Sass의 Mixin을 활용하거나 추후 Webpack 환경에서 PostCSS Plugin인 autoprefixer로 처리할 수 있습니다.</p>
+        </li>
+        <li>
+            <p>pointer-events의 설명 및 참고예시 입니다.
+                <a
+                    href="https://developer.mozilla.org/ko/docs/Web/CSS/pointer-events">https://developer.mozilla.org/ko/docs/Web/CSS/pointer-events</a>
+                <a
+                    href="https://css-tricks.com/almanac/properties/p/pointer-events/">https://css-tricks.com/almanac/properties/p/pointer-events/</a>
+            </p>
+        </li>
+    </ul>
+</body>
+
+</html>

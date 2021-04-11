@@ -1,0 +1,173 @@
+// figma : https://www.figma.com/file/9FXkniEMPgZKtJY4GwP60z/Input?node-id=0%3A3
+
+// color palette
+$gray1: #333333;
+$gray2: #4f4f4f;
+$gray3: #828282;
+$gray4: #bdbdbd;
+$gray5: #e0e0e0;
+$gray6: #f2f2f2;
+$gray7: #f9f9f9;
+$primary: #ed234b;
+
+// color variable rename
+$text-color: $gray1;
+$input-text-color: $gray2;
+$text-link-color: $gray4;
+$placeholder-text-color: $gray4;
+$border-color: $gray5;
+$border-focus-color: $gray1;
+$button-primary-color: $primary;
+$button-gray-color: $gray2;
+
+// default
+html,
+body {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  color: $text-color;
+}
+
+.signup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  .signup {
+    border: 1px solid $border-color;
+    border-radius: 8px;
+    padding: 60px 50px;
+    width: 100%;
+    max-width: 500px;
+
+    .signup-title {
+      font-size: 30px;
+      color: black;
+      line-height: 43px;
+      margin: 16px 0 56px;
+    }
+
+    .signup-form-container {
+      display: flex;
+      flex-direction: column;
+
+      .signup-form-input-container {
+        display: flex;
+        flex-direction: column;
+
+        .signup-form-input {
+          border: 1px solid $border-color;
+          border-radius: 4px;
+          padding: 16px;
+          color: $input-text-color;
+          outline: none;
+          width: 100%;
+
+          &::placeholder {
+            color: $placeholder-text-color;
+          }
+
+          &:focus {
+            border: 1px solid $border-focus-color;
+          }
+
+          &:not(:last-child) {
+            margin-bottom: 12px;
+          }
+        }
+
+        .signup-form-email-row {
+          display: flex;
+
+          .signup-form-send-validation-email-button {
+            padding: 16px;
+            background: $button-gray-color;
+            border-radius: 4px;
+            border: none;
+            color: white;
+            margin-left: 8px;
+            min-width: max-content;
+            height: 48px;
+            outline: none;
+          }
+        }
+      }
+
+      .signup-option-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin: 18px 0 42px;
+
+        .signup-option-row {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          &:not(:last-child) {
+            margin-bottom: 12px;
+          }
+
+          .signup-option-policy-link {
+            font-size: 12px;
+            color: $text-link-color;
+          }
+        }
+
+        // 기본 HTML 체크박스 대신 이미지 활용
+        .signup-form-checkbox-container {
+          .signup-form-checkbox {
+            display: none;
+
+            + label {
+              background: url("./images/checkbox-default.png") no-repeat;
+              height: 16px;
+              display: inline-block;
+              padding-left: 22px;
+              line-height: 16px;
+            }
+
+            &:checked + label {
+              background: url("./images/checkbox-checked.png") no-repeat;
+            }
+          }
+        }
+      }
+
+      .signup-button-container {
+        .signup-button {
+          width: 100%;
+          height: 48px;
+          line-height: 48px;
+          color: white;
+          border: none;
+          border-radius: 4px;
+          font-size: 16px;
+          background: $button-primary-color;
+          font-weight: bold;
+          outline: none;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 769px) {
+  .signup-container {
+    align-items: flex-start;
+
+    .signup {
+      border: none;
+      padding: 40px 20px;
+
+      .signup-title {
+        font-size: 24px;
+        line-height: 35px;
+        margin: 16px 0 40px;
+      }
+    }
+  }
+}

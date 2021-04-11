@@ -1,0 +1,53 @@
+@charset "UTF-8";
+
+/* reset */
+*{font-weight:500;font-family:"Noto Sans KR";font-size:14px;line-height:24px;color:#625F67}
+input[type="checkbox"]{margin:0}
+
+/* content */
+.box_choice{margin:20px 0}
+.tit_choice{display:block;margin:10px 0}
+
+/* color */
+$color1 : #4056c7;
+$color2 : #97b3cd;
+$color3 : #fff;
+
+/* checkbox */
+/* switch 스타일 작성 영역 */
+.item_choice{
+    display:inline-block;position:relative;vertical-align:top;
+    .inp_switch{
+        position:absolute;top:0;left:0;width:100%;height:100%;
+        appearance:none;-webkit-appearance:none;-moz-appearance:none;cursor:pointer;
+        &:checked + .lab_choice::before{background-color: $color1;}
+        &:checked + .lab_choice::after{left:20px}
+        &:disabled,
+        &:disabled + .lab_choice,
+        &:checked:disabled,
+        &:checked:disabled + .lab_choice{cursor:not-allowed}
+        &:disabled + .lab_choice::before,
+        &:checked:disabled + .lab_choice::before{opacity: 0.4;}
+    }
+    .lab_choice{
+        display:block;position:relative;padding-left:50px;cursor: pointer;
+        .txt_switch{display:block;}
+        &:before{
+            position:absolute;top:0;left:0;width:40px;height:100%;border-radius:12px;background-color:$color2;content:"";
+            -webkit-transition:background-color .3s ease;-moz-transition:background-color .3s ease;-ms-transition:background-color .3s ease;;transition:background-color .3s ease;
+        }
+        &:after{
+            position:absolute;top:4px;left:4px;width:16px;height:16px;border-radius: 50%;background-color:$color3;content:"";
+            -webkit-transition:all .3s ease;-moz-transition:all .3s ease;-ms-transition:all .3s ease;;transition:all .3s ease;
+        }
+    }
+    &.type_alone .lab_choice{min-width:40px;min-height:24px;padding-left:0}
+    &.type_reverse{
+        .inp_switch:checked + .lab_choice:after{left:auto;right:4px}
+        .lab_choice{
+            padding-left:0;padding-right:50px;
+            &:before{left:auto;right:0}
+            &:after{left:auto;right:20px}
+        }
+    }
+}

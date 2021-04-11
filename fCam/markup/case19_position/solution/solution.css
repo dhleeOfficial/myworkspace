@@ -1,0 +1,140 @@
+/* variables */
+/* reset */
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+*:focus {
+  outline: none;
+}
+
+html,
+body {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+h1 {
+  text-align: center;
+  margin: 35px auto 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.position_wrap {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 1950px;
+  max-width: 1024px;
+  margin: 40px auto;
+  padding: 40px;
+  background-color: #fafafa;
+}
+
+.position_wrap *:before {
+  content: 'static';
+  display: block;
+  position: absolute;
+  color: #fff;
+  font-size: 30px;
+  padding: 10px;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.9);
+}
+
+.position_wrap .item_relative {
+  padding-bottom: 41.25%;
+  position: relative;
+  top: 10px;
+}
+
+.position_wrap .item_relative:before {
+  content: 'relative';
+}
+
+.position_wrap .item_absolute {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 50%;
+}
+
+.position_wrap .item_absolute:before {
+  content: 'absolute';
+}
+
+.position_wrap .item_absolute:nth-of-type(2) {
+  left: auto;
+  right: 0;
+  top: 0;
+  bottom: auto;
+}
+
+.position_wrap .item_absolute:nth-of-type(2):before {
+  content: 'absolute2';
+}
+
+.position_wrap .item_absolute:nth-of-type(3) {
+  left: 0;
+  right: auto;
+  bottom: 0;
+  top: auto;
+  z-index: 1;
+}
+
+.position_wrap .item_absolute:nth-of-type(3):before {
+  content: 'absolute3';
+}
+
+.position_wrap .item_absolute:nth-of-type(4) {
+  top: auto;
+  right: 0;
+  bottom: 0;
+  left: auto;
+}
+
+.position_wrap .item_absolute:nth-of-type(4):before {
+  content: 'absolute4';
+}
+
+.position_wrap .item_static {
+  position: static;
+}
+
+.position_wrap .item_fixed {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  height: 150px;
+  margin-top: -75px;
+  opacity: .7;
+}
+
+.position_wrap .item_fixed img {
+  height: 100%;
+}
+
+.position_wrap .item_fixed:before {
+  content: 'fixed';
+}
+
+.position_wrap .item_sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.position_wrap .item_sticky:before {
+  content: 'sticky';
+}

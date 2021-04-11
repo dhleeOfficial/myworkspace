@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>03-login (solution)</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="solution.css" />
+  </head>
+  <body>
+    <div class="login-container">
+      <div class="login">
+        <div class="login-logo">
+          <img src="./images/fastcampus-logo.png" alt="fastcampus logo" />
+        </div>
+        <h1 class="login-title">
+          인생을 바꾸는 교육,<br />
+          패스트 캠퍼스.
+        </h1>
+
+        <form class="login-form-container">
+          <div class="login-form-input-container">
+            <input type="text" class="login-form-input" placeholder="아이디" />
+            <input
+              type="password"
+              class="login-form-input"
+              placeholder="비밀번호"
+            />
+          </div>
+
+          <div class="login-option-container">
+            <div class="login-form-checkbox-container">
+              <input
+                type="checkbox"
+                class="login-form-checkbox"
+                id="auto-login"
+              />
+              <label for="auto-login" class="login-form-checkbox-label">
+                자동 로그인
+              </label>
+            </div>
+
+            <div class="login-find-password-container">
+              <a class="login-find-password-link" href="#">비밀번호 찾기</a>
+            </div>
+          </div>
+
+          <div class="login-button-container">
+            <button class="login-button">로그인</button>
+          </div>
+
+          <div class="login-signup-container">
+            아직 계정이 없으신가요?
+            <a href="#" class="login-signup-link">간편 회원가입</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

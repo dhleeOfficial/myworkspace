@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+/* reset */
+*{font-weight:500;font-family:"Noto Sans KR";font-size:14px;line-height:24px;color:#625F67}
+input[type="checkbox"]{margin:0}
+
+/* content */
+.box_choice{margin:20px 0}
+.tit_choice{display:block;margin:10px 0}
+
+/* color */
+$color1 : #4056c7;
+$color2 : #97b3cd;
+$color3 : #fff;
+
+/* checkbox */
+/* switch 스타일 작성 영역 */

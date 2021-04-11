@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+html(lang="ko")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover")
+        title 03-flex
+        link(rel="stylesheet", href="solution.css")
+    body
+
+        h1 Vertical
+        .flex_wrap
+            -var index = 1;
+            -for (var i=0; i<20; i++)
+                .item.mobile
+                    img(src="./img/box_" + index++  + ".jpg", alt="")
+
+        h1 Horizontal
+        .flex_wrap
+            -var index = 1;
+            -for (var i=0; i<20; i++)
+                .item.horizontal.mobile
+                    img(src="./img/box_" + index++  + ".jpg", alt="")
+

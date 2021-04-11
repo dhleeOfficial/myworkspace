@@ -1,0 +1,113 @@
+@charset "utf-8";
+
+/* variables */
+
+$w100: 100%;
+$half: 50%;
+$third: 33.33%;
+$large_box: 300px;
+$small_box: 150px;
+$basis_space: 40px;
+$padding: 15px;
+$box-shadow: 14px 17px 34px -20px rgba(0, 0, 0, 0.75);
+
+/* reset */
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+*:focus {
+    outline: none;
+}
+
+html,
+body {
+    position: relative;
+    width: $w100;
+    height: $w100;
+    padding: 0;
+    margin: 0;
+}
+
+h1 {
+    text-align: center;
+    margin: 35px auto 0;
+}
+
+.float_wrap {
+    display: block;
+    width: $w100;
+    max-width: 1024px;
+    margin: $basis_space auto;
+    padding: $basis_space;
+    background-color: #fafafa;
+    counter-reset: items;
+    .item_wrap {
+        display: block;
+        /* float을 해제하는 방법들은 다양합니다. */
+        &:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+        .item {
+            float: left;
+            width: $third;
+            position: relative;
+            height: $small_box;
+            padding: $padding;
+            box-sizing: border-box;
+            overflow: hidden;
+            &.large {
+                height: $large_box;
+            }
+            &.small {
+                height: $small_box;
+            }
+            img {
+                position: absolute;
+                left: $half;
+                top: $half;
+                height: 100%;
+                -webkit-transform: translate3d(-$half, -$half, 0);
+                transform: translate3d(-$half, -$half, 0);
+            }
+            &:before {
+                counter-increment: items;
+                content: counter(items);
+                position: relative;
+                z-index: 1;
+                color: #fff;
+            }
+        }
+        .item_child_wrap {
+            display: block;
+            float: left;
+            width: $third;
+            .item {
+                float: none;
+                width: 100%;
+                &.half {
+                    width: $half;
+                }
+            }
+        }
+        &:nth-of-type(2) {
+            .item_child_wrap {
+                width: 66.66%;
+                .item {
+                    float: left;
+                }
+                .w-100 img {
+                    width: 100%;
+                }
+            }
+            .item:last-of-type {
+                float: right;
+            }
+        }
+    }
+}
