@@ -14,8 +14,10 @@ export default function App() {
     setOpen(e.target.parentElement.open ? null : index);
   };
 
-  const closeAll = () => {
-    setOpen(null);
+  const closeAll = (e) => {
+    if (e.target.nodeName !== 'P') {
+      setOpen(null);
+    }
   };
 
   useEffect(() => {
@@ -40,7 +42,9 @@ export default function App() {
         ))}
       </div>
 
-      <ContextPortal /* 채워 넣으세요. */ />
+      <ContextPortal
+        children = {<p>{dummyData[openedIndex]?.context}</p>}
+        target = {detailRefs.current[openedIndex]} />
     </>
   );
 }
