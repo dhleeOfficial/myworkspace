@@ -10,11 +10,20 @@ const App = () => {
   const contentRef = useRef([]);
   const moveToPage = index => () => {
     // do something
+    contentRef.current[index].scrollIntoView({
+      block: 'start',
+      behavior: 'smooth'
+    })
   };
 
   const scrollSpyObserver = new IntersectionObserver(
     entries => {
       // do something
+      const { target } = entries.find(entry => entry.isIntersecting) || {}
+
+      const idx = contentRef.current.indexOf(target)
+
+      setViewIndex(idx)
     },
     {
       root: null,

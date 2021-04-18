@@ -7,7 +7,11 @@ const contentItems = Array.from(contentsElem.children);
 
 let offsetTops = [];
 const getOffsetTops = () => {
-  // do something
+  offsetTops = contentItems.map(elem => {
+    const [ofst, clh] = [elem.offsetTop, elem.clientHeight];
+
+    return [ofst - clh / 2, ofst + clh / 2];
+  })
 };
 getOffsetTops();
 
