@@ -28,6 +28,17 @@
                 - 지정한 클래스 값이 요소의 class 속성에 존재하는지 확인
             - replace( oldClass, newClass )
                 - 존재하는 클래스를 새로운 클래스로 교체한다.
+    
+    # Element 스크롤 관련 속성
+        - clientHeight, clientWidth
+            - 실제로 보여지고 있는 컨텐츠가 얼마만큼의 공간을 차지하고 있는지 확인한다.
+            - 패딩은 포함하지만 보더와 스크롤바의 크기를 제외한 실제 컨텐츠의 크기를 리턴한다.
+        - clientLeft, clientTop
+            - 
+        - offsetHeight, offsetWidth
+            - 요소의 패딩, 보더, 스크롤바 사이즈를 포함한 값을 리턴
+        - offsetLeft, offsetTop
+        - offsetParent
                 
 # getElementById vs querySelector
     - document.getElementById('idName')
