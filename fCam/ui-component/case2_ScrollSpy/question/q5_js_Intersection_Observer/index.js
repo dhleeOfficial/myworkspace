@@ -7,7 +7,14 @@ const contentItems = Array.from(contentsElem.children);
 
 const scrollSpyObserver = new IntersectionObserver(
   entries => {
-    // do something
+    const { target } = entries.find(entry => entry.isIntersecting);
+
+    const idx = contentItems.indexOf(target)
+
+    navItems.forEach((c, i) => {
+      if (i === idx) c.classList.add('on')
+      else c.classList.remove('on')
+    })
   },
   {
     root: null,
