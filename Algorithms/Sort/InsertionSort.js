@@ -23,15 +23,12 @@ const InsertionSort = (unSortedArr) => {
         let temp = unSortedArr[i];
         let j;
 
-        console.log('===========')
         for (j = i - 1; j >= 0 && temp < unSortedArr[j]; j--) {
             unSortedArr[j + 1] = unSortedArr[j];
 
         }
 
         unSortedArr[j + 1] = temp;
-        console.log(unSortedArr);
-        console.log('===========')
     }
 
     return unSortedArr;
