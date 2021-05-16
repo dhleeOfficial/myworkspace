@@ -11,4 +11,4 @@ function solution(A) {
     return 1;
 }
 
-console.log(solution([4, 1, 3, 2]));
+console.log(solution([]));
