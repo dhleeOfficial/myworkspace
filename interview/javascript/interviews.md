@@ -199,18 +199,152 @@
                 console.log(kim.name);      // kim
                 console.log(lee.name);      // lee
             - 하지만, new 키워드를 빼먹는 순간 일반 함수 호출과 같아지기 때문에 위의 경우, this는 window에 바인딩됨
+        - 명시적 바인딩을 한 this
+            - apply, call 메소드는 Function Object에 기본적으로 정의된 메소드
+            - 인자를 this로 만들어주는 기능을 함
+            - ex>
+                function whoisThis() { console.log(this); }
+                
+                whoisThis();    // window
+
+                var obj = { x: 123 };
+
+                whoisThis().call(obj);  // { x: 123 }
+        - 화살표 함수로 쓴 this
+            - 전역 컨텍스트에서 실행되더라도 this를 새로 정의하지 않는다.
+            - 바로 바깥 함수나 클래스의 this를 씀
+        - 메소드의 내부함수에서의 this
+            - ex>
+                const obj1 = {
+                    outer: function() {
+                        console.log(this);          // (1)
+
+                        const innerFunc = function () {
+                            console.log(this);      // (2)(3)
+                        };
+
+                        innerFunc();
+
+                        const obj2 = {
+                            innerMethod: innerFunc
+                        };
+
+                        obj2.innerMethod();
+                    }
+                };
+
+                obj1.outer();
+
+                - 동작
+                    - (1)에서 가장 먼저 호출되며 this가 obj1 reference로 바인딩되어 있음
+                    - 그다음 innerFunc()가 호출되는데, this를 함수로서 호출한 것이므로 자동으로 스코프 체인상의 최상위 객체인 전역객체가 바인딩되어 출력됨
+                    - 마지막 obj2.innerMethod()가 호출되면서 this가 출력되고, 이때 obj2로 바인딩되어 있음
+            - this 바인딩에 관해서는 함수를 실행하는 당시의 주변 환경이 중요하지 않고, 오로지 해당 함수를 호출하는 구문 앞에 점 또는 대괄호 표시가 있는지 없는지가 관건!
+            - 메서드 내부 함수에서 this를 우회하는 방법 ( ES5 )
+                - ex>
+                    const obj = {
+                        outer: function() {
+                            console.log(this);
+
+                            const innerFunc1 = function() {
+                                console.log(this);
+                            };
+
+                            innerFunc1();
+
+                            const self = this;
+                            const innerFunc2 = function() {
+                                console.log(self);
+                            };
+                            innerFunc2();
+                        }
+                    };
+
+                    obj.outer();
+
+                    - 동작
+                        - 위 코드에서 innerFunc1의 내부에서 this는 전역객체를 가리킴
+                        - outer 스코프에서 self라는 변수에 this를 저장한 상태에서 호출하는 innerFunc2()는 객체 obj가 출력된다.
+            - this를 바인딩하지 않는 함수
+                - 화살표 함수는 실행 컨텍스트를 생성할 때 this 바인딩 자체가 빠지게 되어 상위 스코프 this를 그대로 활용할 수 있다.
 # protoType
 
 # hoisting
 
 # closure
+    - 함수와 그 함수가 선언된 렉시컬 환경의 조합
 
 # callback / promise / async & await
 
 # AJAX
 
-
-
 # Event loop
 
-#
+# forEach와 map의 주요 차이점
+    - forEach
+        - 배열의 요소를 반복
+        - 각 요소에 대해 콜백을 실행
+        - 값을 반환하지 않는다.
+    - map
+        - 배열의 요소를 반복
+        - 각 요소에서 함수를 호출하여 결과로 새 배열을 작성하여 각 요소를 새 요소에 매핑
+    - 가장 큰 차이점은 map 메소드는 새로운 배열을 반환한다는 것
+    - 결과가 필요하지만 원본 배열을 변경하고 싶지 않으면 .map이 확실한 선택
+    - 단순히 배열을 반복할 필요가 있다면, forEach가 좋은 선택
+
+# .call과 .apply의 차이점
+    - 모두 함수를 호출하는데 사용
+    - 첫번째 매개변수는 함수 내에서 this의 값으로 사용
+    - call
+        - 쉼표로 구분된 인수를 두번째 인수로 취함
+    - apply
+        - 인수의 배열을 두번째 인수로 취함
+    - ex>
+        function add(a, b) { return a + b; }
+
+        console.log(add.call(null, 1, 2));
+        console.log(add.apply(null, [1, 2]));
+
+# function foo() {}와 var foo = function {}에서 foo의 차이점
+    - function foo() {}
+        - 함수 선언 ( function statement )
+        - 코드 블럭 자체가 실행 가능 코드가 아니다.
+        - 해당 코드 블럭을 콘솔에서 실행하여도 어떠한 결과가 리턴되지 않는다.
+        - 호이스팅이 됨
+    - var foo = function {}
+        - 함수 표현 ( function literal )
+        - 특정 변수에 할당되거나 즉시 실행가능한 코드 블럭으로서 존재하는 함수를 의미
+        - 호이스팅 되지 않음
+
+# null vs undefined vs undeclared
+    - null
+        - NULL의 symbol
+        - 의도를 가지고 변수에 null을 할당하여 값이 없다는 것을 나타냄
+        - null이 할당된 변수의 타입을 확인해보면 object
+    - undefined
+        - 변수를 선언하고 값을 할당하기 전의 형태
+        - undefined가 나오는 경우의 예시
+            - 존재하지 않는 객체의 프로퍼티를 읽으려고 할 때
+            - 존재하지 않는 배열에 요소를 읽으려고 할 때
+    - undeclaraed
+        - 접근 가능한 스코프에 변수 선언조차 되어있지 않은 상태
+        - 타입을 확인해보면 undefined
+    
+# '==' vs '===' 차이
+    - '=='
+        - 서로 다른 유형의 두 변수의 값 비교
+    - '==='
+        - 엄격한 비교
+    - ex>
+        - 0 == false            // true
+        - 0 === false           // false
+            - typeof 0 : number type
+            - typeof false : boolean type
+        - 2 == "2"              // true
+        - 2 === "2"             // false
+            - typeof 2          // number type
+            - typeof "2"        // string type
+        - null == undefined     // true
+        - null === undefined    // false
+            - typeof null       // object type
+            - typeof undefined  // undefined
