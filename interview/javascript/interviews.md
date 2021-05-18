@@ -268,17 +268,154 @@
             - this를 바인딩하지 않는 함수
                 - 화살표 함수는 실행 컨텍스트를 생성할 때 this 바인딩 자체가 빠지게 되어 상위 스코프 this를 그대로 활용할 수 있다.
 # protoType
+    - 자바스크립트는 클래스라는 개념이 없었다. ( ES6 이전 )
+        - 기존의 객체를 복사하여 새로운 객체를 생성하는 프로토타입 기반의 언어임
+            - 프로토타입 기반 언어는 객체 원형인 프로토타입을 이용하여 새로운 객체를 만들어냄
+            - 이렇게 생성된 객체 역시 또 다른 객체의 원형이 될 수 있다.
+    - 자바스크립트는 프로토타입을 기반으로 상속을 구현하여 불필요한 중복을 제거함 ( 기존의 코드를 재사용하므로서 )
+    - 즉, 생성자 함수가 생성할 모든 인스턴스가 공통적으로 사용할 프로퍼티나 메소드를 프로토타입에 미리 구현해놓음으로서 또 구현하는 것이 아니라 상위 객체인 프로토타입의 자산을 공유하여 사용할 수 있음
+    - __proto__ 접근자 프로퍼티로 자신의 프로토타입, 즉 Prototype 내부 슬롯에 접근할 수 있음
+    - 프로토타입 체인?
+        - 객체의 프로퍼티에 접근하려고 할 때, 객체에 접근하려는 프로퍼티가 없으면 __proto__ 접근자 프로퍼티가 가리키는 링크를 따라 자신의 부모 역할을 하는 프로토타입의 프로퍼티를 순차적으로 검색
+        - 프로타입 체인의 최상위 객체는 Object.prototype이다.
+            - Object.prototype의 프로퍼티와 메소드는 모든 객체에 상속된다.
+        - prototype 프로퍼티는 생성자 함수가 생성할 인스턴스의 프로토타입을 가리킨다.
+    - 프로토타입의 이해
+        - 자바스크립트에 클래스는 없지만 함수와 new 키워드를 통해 클래스 비스무리하게 흉내낼 수 있다.
+        - ex>
+            function Person() {
+                this.eyes = 2;
+                this.nose = 1;
+            }
 
+            let kim = new Person();
+            let park = new Person();
+
+            console.log(kim.eyes, kim.nose);        // 2 1
+            console.log(park.eyes, park.nose);      // 2 1
+
+            - kim과 park은 eyes와 nose를 공통적으로 가지고 있는데, 메모리에는 eyes와 nose가 두 개씩 총 4개가 할당된다. ( 이 문제를 프로토타입으로 해결할 수 있다. )
+            - ex>
+                function Person {}
+
+                Person.prototype.eyes = 2;
+                Person.prototype.nose = 1;
+
+                let kim = new Person();
+                let park = new Person();
+            
+        - 자바스크립트에는 Prototype Link와 Prototype Object라는 것이 존재하며 이를 통틀어 Prototype이라고 부른다.
+            - Prototype Object
+                - 객체는 언제나 함수로 생성된다!
+                    - ex>
+                        function Person() {}    // 함수
+
+                        var personObj = new Person();   // 함수로 객체를 생성
+                    
+                    - personObj 객체는 Person이라는 함수로 생성된 객체!
+                    - 일반적으로 사용하는 객체 생성도 마찬가지이다!
+                        - ex>
+                            var obj = {};
+
+                        - 이 코드는 사실 var obj = new Object(); 와 같다.
+                - Object와 마찬가지로 Function, Array도 모두 함수로 정의되어 있다!
+                - 함수가 정의될 때는 2가지 일이 동시에 이루어진다!
+                    - 1. 해당 함수에 Constructor 자격 부여
+                        - Constructor 자격이 부여되면 new를 통해 객체를 만들어낼 수 있다.
+                        - 이것이 함수만 new 키워드를 사용할 수 있는 이유
+                    - 2. 해당 함수의 Prototype Object 생성 및 연결
+                        - 함수를 정의하면 함수만 생성되는 것이 아니라 Prototype Object도 같이 생성된다.
+                        - 생성된 함수는 prototype 속성을 통해 Prototype Object에 접근할 수 있다.
+                        - Prototype Object는 일반적인 객체와 같으며 기본적인 속성으로 constructor와 __proto__를 가지고 있음
+                            - constructor는 Prototype Object와 같이 생성되었던 함수를 가리키고 있음
+                            - __proto__는 Prototype Link
+                        - Prototype Object는 일반적인 객체이므로 속성을 마음대로 추가 / 삭제할 수 있다.
+                            - kim과 park은 Person 함수를 통해 생성되었으니 Person.prototype을 참조할 수 있게됨
+            - Prototype Link
+                - kim에는 eyes 속성이 없는데도 kim.eyes를 실행하면 2라는 값을 참조한다. ( Prototype Object의 eyes를 참조한 것 )
+                - __proto__ 프로퍼티가 이를 가능케함
+                    - prototype 속성은 함수만 가지고 있던 것과 달리 __proto__ 속성은 모든 객체가 빠짐없이 가지고 있는 속성
+                    - __proto__는 객체가 생성될 때 조상이었던 함수의 Prototype Object를 가리킴
+                        - kim 객체는 Person 함수로부터 생성되었으니 Person 함수의 Prototype Object를 가리키는 것
+                - kim 객체가 eyes를 직접 가지고 있지 않기 때문에 eyes 속성을 찾을 때까지 상위 프로토타입을 탐색한다.
+                - 최상위인 Object의 Prototype Object까지 도달했는데도 못 찾았을 경우 undefined를 리턴함
+                - 이렇게 __proto__ 속성을 통해 상위 프로토타입과 연결되어 있는 형태를 프로토타입 체인이라고 함
+                    - 이런 프로토타입 체인 구조 때문에 모든 객체는 Object의 자식이라고 불리고, Object Prototype Object에 있는 모든 속성을 사용할 수 있다. ( ex. toString )
+
+                        
 # hoisting
 
 # closure
     - 함수와 그 함수가 선언된 렉시컬 환경의 조합
+    - 반환된 내부 함수가 자신이 선언되었을 때의 환경인 스코프를 기억하여 자신이 선언되었을때의 환경 밖에서 호출되어도 그 환경에 접근할 수 있는 함수 ( 자신이 생성될 때의 환경을 기억하는 함수 )
+    - 사용하는 이유
+        - 현재 상태를 기억하고 변경된 최신 상태를 유지하기 위해
+        - 전역 변수의 사용을 억제하기 위해
+        - 정보를 은닉하기 위해
 
 # callback / promise / async & await
 
+# XMLHttpRequest
+    - 브라우저는 이 객체를 이용하여 AJAX 요청을 생성하고 전송
+    - 서버가 브라우저의 요청에 대해 응답을 반환하면 같은 객체가 그 결과를 처리함
+    - ex>
+        const xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === xhr.DONE) {
+                if (xhr.status === 200 || xhr.status === 201) {
+                    console.log(xhr.responseText);
+                } else {
+                    console.error(xhr.responseText);
+                }
+            }
+        };
+
+        xhr.open('GET', '/users');
+        xhr.send();
+
+    - 메소드
+        - open
 # AJAX
+    - Asynchronous Javascript and XML
+    - 클라이언트와 서버가 xml 데이터를 주고 받는 정보 교한 기법 중 하나
+        - Javascript 구문 내에서 xml ( json / yaml / text )를 이용해서 비동기를 사용하기만 하면 됨
+        - 그래서 여러 서드 파티 라이브러리들이 존재
+            - 하지만 모든 라이브러리들은 결국 XMLHttpRequest 객체를 사용한다.
+    - 기존에는 클라이언트에서 서버로 요청을 보내고 응답을 받으면 다시 화면을 갱신해야 했고 이 과정에서 많은 리소스가 낭비된다.
+    - 이를 해결하기 위해 AJAX는 페이지에서 필요한 일부만 갱신할 수 있도록 XMLHttpRequest 객체를 서버에 요청함
+    - 실제로 XML은 AJAX에서 잘 쓰이지 않으며 데이터 전송의 흐름이 XML에서 JSON으로 넘어왔기 때문
 
 # Event loop
+    - 자바스크립트는 단일 스레드 기반의 언어로 비동기처럼 동작할 수 있게 하는 것
+    - Call stack이 비어있을 경우, Callback queue에서 함수를 꺼내 Call stack에 추가하는 역할
+    - ex>
+        console.log('first');
+        setTimeout(function cb() { console.log('second'); }, 0);
+
+        wait3Seconds();
+        console.log('third');
+
+        function wait3Seconds() {
+            let start = Date.now(), now = start;
+
+            while (now - start < 3 * 1000) {
+                now = Date.now();
+            }
+        }
+
+        - 실행 결과
+            first
+            third
+            second
+        - Event loop는 Call Stack이 비어있지 않기 때문에 Callback queue를 체크하지 않음!
+        - setTimeout의 delay 인자가 delay ms 후에 실행되는 것을 보장하지 않는다! 정확히는 delay ms 후에 Callback queue에 들어가는 것을 보장하는 것!
+            - 자바스크립트 언어 자체가 비동기 특성을 제공하는게 아니라 Browser의 구성 요소들이 제공하는 것이다!
+    - ES6/ES2015에서 소개된 Job queue는 Callback queue와 다른 queue이며 Promise를 사용할 경우, Job queue를 사용하게됨
+        - Promise를 사용할 때, callback 함수 역할을 하는 .then을 사용하게 되며 이런 thenable한 함수들은 Job queue에 추가된다!
+        - 우선순위는 Job queue의 우선 순위가 Callback queue보다 높다.
+        - Event loop는 Call stack이 비어있을 경우, Job queue에서 기다리는 모든 작업을 처리하고 Callback queue로 이동하게 된다.
+        - HTML 스펙에서는 Job queue를 microtask queue라고도 부름
 
 # forEach와 map의 주요 차이점
     - forEach
@@ -348,3 +485,7 @@
         - null === undefined    // false
             - typeof null       // object type
             - typeof undefined  // undefined
+
+# js class
+
+# 
