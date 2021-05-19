@@ -345,19 +345,155 @@
 # 함수 표현식 vs 함수 선언식
     - 함수 선언식
         - 일반적인 프로그래밍 언에서의 함수 선언과 비슷한 형식
+        - ex>
+            functionName();
+
+            function functinName() { console.log('hi'); }
+            - 함수 호이스팅이 가능
+            - 그렇기 때문에 함수 선언 전에 functionName()을 호출해도 정상적으로 동작한다.
+    - 함수 표현식
+        - 일반적인 변수 할당과 비슷
+        - ex>
+            functionName();     // error
+
+            var functionName = function() { console.log('hi'); }
+            - 함수 호이스팅 발생하지 않음
+            - 그렇기 때문에 functionName()을 호출하면 에러가 발생한다.
+
 # hoisting
     - 
 
 # closure
     - 함수와 그 함수가 선언된 렉시컬 환경의 조합
+    - 다른 함수의 스코프에 있는 변수에 접근 가능한 함수
     - 반환된 내부 함수가 자신이 선언되었을 때의 환경인 스코프를 기억하여 자신이 선언되었을때의 환경 밖에서 호출되어도 그 환경에 접근할 수 있는 함수 ( 자신이 생성될 때의 환경을 기억하는 함수 )
     - 사용하는 이유
         - 현재 상태를 기억하고 변경된 최신 상태를 유지하기 위해
         - 전역 변수의 사용을 억제하기 위해
         - 정보를 은닉하기 위해
+    - ex>
+        function createFunction(separator) {
+            return function(obj1, obj2) {
+                var sumString = obj1 + separator + obj2;
+
+                return sumString;
+            }
+        }
+
+        var tFunc = createFunction(':');
+
+        console.log(tFunc('name', 'name1'));
+        
+        - 분명 함수 내부 지역변수는 함수가 실행되는 동안에만 존재함!
+        - 하지만, 내부 함수에서 외부 함수의 변수(separator)에 접근함
+            - 내부 함수의 스코프 체인에 createFunction()의 스코프가 포함되기 때문
 
 # callback / promise / async & await
+    - Callback
+        - 비동기 처리를 구현하기 위해 만들어짐
+        - 다른 함수에게 전달되어 어느 시점에 실행될 수 있도록 던져주는 함수
+        - 하지만 콜백 지옥이라 불리는 중첩문이 발생하면서 에러 처리 한계와 가독성의 문제가 생김
+    - Promise
+        - 자바스크립트 비동기 처리에 사용되는 객체
+        - 특정 코드의 실행이 완료될 때까지 기다리지 않고 다음 코드를 먼저 수행하는 자바스크립트의 특성
+        - ex>
+            function getData(callback) {
+                return new Promise((resolve, reject) => {
+                    $.get('url주소', (response) => {
+                        resolve(response);
+                    })
+                })
+            }
 
+            getData().then(res => {
+                console.log(res);
+            })
+        - Promise의 3가지 상태
+            - 상태란 ? 프로미스의 처리 과정
+            - new Promise()로 프로미스를 생성하고 종료될 때까지 3가지 상태를 갖는다.
+                - Pending( 대기 ) : 비동기 처리 로직이 아직 완료되지 않은 상태
+                    - new Promise() 메소드를 호출하면 Pending 상태가 된다.
+                    - 이 메소드를 호출할 때 콜백 함수를 선언할 수 있고 콜백 함수의 인자는 resolve, reject이다.
+                - Fulfilled( 이행 ) : 비동기 처리가 완료되어 프로미스가 결과 값을 반환해준 상태
+                    - new Promise((resolve, reject) => resolve(); );
+                    - 위와 같이 resolve를 실행하면 Fulfilled 상태가 된다.
+                    - Fulfilled 상태가 되면 then()을 이용하여 결과 값을 받을 수 있다.
+                - Rejected( 실패 ) : 비동기 처리가 실패하거나 오류를 발생한 상태
+                    - new Promise((resolve, reject) => reject(); );
+                    - 위와 같이 reject를 실행하면 실패 상태가 된다.
+                    - 실패 상태가 되면 실패한 이유를 catch()로 받을 수 있다.
+        - Promise Chaining
+            - 여러 개의 프로미스를 연결하여 사용할 수 있다.
+            - then 메서드를 호출하고 나면 새로운 프로미스 객체가 반환됨
+            - ex>
+                new Promise((resolve, reject) => {
+                    setTimeout(() => resolve(1), 2000);
+                })
+                .then((result) => {
+                    return result + 10;
+                })
+                .then((result) => {
+                    return result + 20;
+                })
+                .then(result => console.log(result));
+        - Promise error processing
+            - 1. then()의 두번째 인자로 에러를 처리하는 방법
+            - 2. catch()를 이용하는 방법
+            - 2번 방법을 사용해라!
+                - ex> 안좋은 예
+                    function getData() {
+                        return new Promise((resolve, reject) => {
+                            resolve('hi');
+                        });
+                    }
+
+                    getData().then(function(result) {
+                        console.log(result);
+
+                        throw new Error("Error in then()");     // then 내부에서 발생한 에러는 잡을 수 없다.
+                    }, function(err) {
+                        console.log('then error : ', err);
+                    })
+
+                    - then의 첫번째 콜백 함수 내부에서 오류가 나는 경우는 잡아내지 못한다.
+                    - 하지만 catch로 처리하면 잡아낼 수 있다.
+        - Promise.all
+            - 프로미스가 담겨있는 배열 등의 Iterable을 인자로 전달 받음
+            - 전달 받은 모든 프로미스를 병럴로 처리하고, 그 처리 결과를 배열에 담아 resolve하는 새로운 프로미스를 반환
+            - 만약 첫번째 프로미스가 가장 나중에 처리되어도 첫번째 resolve한 처리 결과부터 차례대로 배열에 담아 그 배열을 resolve하는 새로운 프로미스를 반환( 처리 순서가 보장된다는 것 )
+            - 프로미스의 처리가 하나라도 실패한다면?
+                - 가장 먼저 실패한 프로미스가 reject한 에러를 reject하는 새로운 프로미스를 즉시 반환
+        - Promise.race
+            - Promise.all 메소드와 동일하게 프로미스가 담겨 있는 배열 등의 Iterable을 인자로 받음
+            - 병렬 처리가 아니라 가장 먼저 처리된 프로미스가 resolve한 처리 결과를 resolve하는 새로운 프로미스 반환
+    - async & await
+        - 자바스크립트의 비동기 처리 패턴 중 가장 최근에 나온 문법
+        - ex>
+            async function logName() {
+                var user = await fetchUser('domain.com/users/1');
+
+                if (user.id === 1) { console.log(user.name); }
+            }
+            - 먼저 함수의 앞에 async라는 예약어를 붙인다.
+            - 그 후, 함수의 내부 로직 중 HTTP 통신을 하는 비동기 처리 코드 앞에 await를 붙인다.
+            - 주의해야할 점!! 비동기 처리 메서드가 꼭 프로미스 객체를 반환해야 await가 의도한대로 동작함
+            - 일반적으로 await의 대상이 되는 비동기 처리 코드는 axios 등의 프로미스를 반환하는 API 호출 함수이다.
+        - 예외 처리
+            - try...catch 문을 사용하면됨
+            - ex>
+                async function logTotoTitle() {
+                    try {
+                        var user = await fetchUser();
+
+                        if (user.id === 1) {
+                            var todo = await fetchTodo();
+                            
+                            console.log(todo.title);
+                        }
+                    } catch (error) {
+                        console.log(error);
+                    }
+                }
 # XMLHttpRequest
     - 브라우저는 이 객체를 이용하여 AJAX 요청을 생성하고 전송
     - 서버가 브라우저의 요청에 대해 응답을 반환하면 같은 객체가 그 결과를 처리함
@@ -491,6 +627,231 @@
 
 # js class
 
-# symbol
+# Symbol
+    - ES6 (ECMAScript 2015)에 추가됨
+    - 자바스크립트의 원시 타입으로 새롭게 추가됨
+        - 기존 원시 타입
+            - string
+            - number
+            - boolean
+            - null
+            - undefined
+            - object
+    - 심볼 생성 방법은 심볼 wrapper 함수를 호출하면 됨
+        - const sym = Symbol();
+    - Symbol()로부터 반환되는 값은 항상 고유하다!
+        - ex>
+            const s1 = Symbol();
+            const s2 = Symbol();
 
-# iterator
+            const aSymbol_1 = Symbol('a');
+            const aSymbol_2 = Symbol('a');
+
+            console.log(s1 === s2);     // false
+            console.log(aSymbol_1 === aSymbol_2)    // false
+
+    - 같은 심볼을 사용하고 싶다면..?
+        const s1 = Symbol();
+        const s2 = s1;
+
+        또는
+
+        const s1 = Symbol.for('mySym');
+        const s2 = Symbol.for('mySym');
+
+        console.log(s1 === s2);     // true
+    - 기존의 다른 원시 타입과 차이점
+        - new 연산자를 통해 wrapper 객체를 생성할 수 없다는 점!
+            - ex>
+                const str = new String('Hello');
+                const num = new Number(12);
+                const sym = new Symbol();   // TypeError!
+    - 심볼 타입은 주로 객체의 고유한 프로퍼티의 값으로 사용하는 목적으로 쓰임
+        - ex>
+            const a = Symbol();
+
+            const obj = {
+                a: 'a',
+                [a]: '조금 다른 a'
+            }
+
+            obj.a
+            obj[a]
+    - 활용 방안
+        - 만약? 숫자 타입인지 확인하는 라이브러리를 만들어보자
+            - ex>
+                Number.isNumber = arg => {
+                    return typeof arg === 'number' ? '숫자' : '숫자아님';
+                }
+
+                console.log(Number.isNumber(10));   //숫자
+
+        - 만약 ECMA 표준으로 isNumber가 추가된다면?
+            - 코드를 다 고쳐야한다..
+            - 표준으로 채택되도 Number.isNumber에 라이브러리의 구현 부분을 덮어쓰면 되기는 하지만 자바스크립트에는 덮어쓸 수 없는 상수 프로퍼티가 몇몇 존재함
+                - 만약 isNumber가 표준으로 적용되었는데 isNumber의 writeable이 false일 경우 덮어쓸 수 없고 코드를 모두 고쳐야함
+        - 하지만 심볼을 사용한다면?
+            - ex>
+                const isNumber = Symbol();
+
+                Number[isNumber] = arg => {
+                    return typeof arg === 'number' ? '숫자' : '숫자아님';
+                }
+
+                if (Number[isNumber](10) === '숫자') {
+                    /// 처리로직
+                }
+            - 심볼 타입을 통해 고유한 프로퍼티를 정의하고 접근할 수 있게 되었다!
+            - 심지어 같은 심볼을 통해 접근하지 않는 이상 덮어쓰기도 불가능하다!
+
+# Generator
+    - 함수의 실행을 중간에 멈췄다가 재개할 수 있는 기능
+    - function 키워드 옆에 *과 내부에 yield 키워드를 이용하여 구현
+    - ex>
+        function* fn() {
+            console.log(1);
+            yield 1;
+
+            console.log(2);
+            yield 2;
+
+            console.log(3);
+            console.log(4);
+
+            yield 3;
+
+            return "finish";
+        }
+
+        const a = fn();
+
+        - fn()을 실행하면 Generator 객체가 반환되며, 함수 본문 코드는 실행되지 않았다.
+        - 메소드
+            - Generator 객체의 메소드인 next()를 실행하면 가장 가까운 yield 문을 만날 때까지 실행됨
+                - next() 메소드에 반환 값은 객체이며 value와 done 프로퍼티를 가지고 있음
+                    - value는 yield 값이며, 없는 경우 undefined
+                    - done은 코드가 끝났는지 나타내는 불리언 값
+                    - 더이상 yield가 없으면 return 값이 value에 들어간다.
+            - return()
+                - a.return('END');를 호출하면 그 즉시 함수가 종료되며, 반환된 객체는 { value: 'END', done: true }값을 가진다.
+            - throw()
+                - a.throw(new Error('error'));
+                - 함수 본문을 try...catch로 감싼 후 위의 메소드를 실행하면 함수가 종료되며 catch문에 error를 볼 수 있다.
+    - iterable
+        - Symbol.iterator 메소드가 있다.
+        - Symbol.iterator는 iterator를 반환해야한다.
+    
+    - iterator
+        - next 메소드를 가진다.
+        - next 메소드는 value와 done 속성을 가진 객체를 반환한다.
+        - 작업이 끝나면 done은 true가 된다.
+
+        - ex>
+            const arr = [1, 2, 3, 4];
+
+            const iter = arr[Symbol.iterator]();
+
+            iter.next();    // { value: 1, done: false };
+            - 배열은 iterable하며 반복가능한 객체라는 것!
+            - iterable 하다면? for...of 문을 통해 순회가 가능하다.
+    - Generator 객체에는 Symbol.iterator 메소드가 있다.
+        - const a = fn();
+        - a[Symbol.iterator]() === a    // true
+        - 즉, Generator는 iterable하며 for...of를 통해 순회 가능하다.
+    - next에 인수를 전달할 수 있다.
+        - ex>
+            function* fn() {
+                const num1 = yield "숫자 입력";
+
+                console.log(num1);
+
+                const num2 = yield "숫자 입력";
+
+                console.log(num2);
+
+                return num1 + num2;
+            }
+
+            const a = fn();
+
+            - 실행 과정
+                - a.next();
+                    { value: "숫자 입력", done: false }
+                - a.next(2);
+                    - 인수값이 num1에 저장되며 console 로그가 찍힌다.
+                    - { value: "숫자 입력", done: false }
+                - a.next(4);
+                    - 동일함
+                    - { value: 6, done: true }
+    - Generator는 값을 미리 만들어 두지 않는다.
+    - yield*d을 이용하여 다른 Generator를 호출할 수 있다.
+        - ex>
+            function* gen1() {
+                yield "W";
+                yield "o";
+                yield "r";
+                yield "l";
+                yield "d";
+            }
+
+            function* gen2() {
+                yield "Hello,";
+                yield* gen1();  //반복 가능한 모든 iterable한 객체가 와도 된다.
+                yield "!";
+            }
+
+            console.log(...gen2()); // Spread syntax로 풀어서 실행할 수 있다.
+
+# use strict
+    - 엄격 모드라고 불리는 use strict는 문자열로 표현함
+    - 스크립트 최상단 또는 엄격하게 동작되어야할 함수 최상단에 위치시킴
+    - 기존 js는 암묵적으로 느슨한 모드로 처리했음
+        - ex>
+            amount = 10;
+            console.log(amount);
+
+            - use strict를 추가하지 않는다면 var이나 let을 쓰지 않아도 변수와 값이 생성됨
+            - use strict를 추가한다면 amount is not defined가 출력됨
+        - use strict 문자열을 추가하게 되면
+            - 기존에는 무시했던 에러들을 throw
+            - JS 엔진 최적화 작업을 어렵게 만드는 실수들을 잡고 가끔은 엄격 모드 코드는 비 엄격 모드의 동일한 코드보다 더 빨리 작동됨
+            - ECMAScript의 차기 버전들에서 정의될 문법을 금지함
+    - 활용
+        - script strict mode
+            'use strict';
+            var amount = 10;
+        - function strict mode
+            function strict() {
+                'use strict';
+                return 'hello';
+            }
+        - module strict mode
+            - 모듈은 기본적으로 엄격모드
+            function strict() {}
+
+            export default strict;
+
+# throttle vs debounce
+    - 이벤트 핸들러가 많은 연산을 수행하는 경우에 대해 제약을 걸어 제어할 수 있는 수준으로 이벤트를 발생시키는 것을 목표
+    - 사용 사례
+        - 사용자가 창 크기 조정을 멈출 때까지 기다렸다가 resizing event를 사용하기 위해
+        - 사용자가 키보드 입력을 중지( ex. 검색창 )할 때까지 ajax 이벤트를 발생시키지 않기 위해
+        - 페이지의 스크롤 위치를 측정하고 최대 50ms마다 응답하기를 바랄 경우
+        - 앱에서 요소를 드래그할 때 좋은 성능을 보장하기 위해
+    - Debounce
+        - 이벤트를 그룹화하여 특정 시간이 지난 후 하나의 이벤트만 발생하도록 하는 기술
+        - 연이어 호출되는 함수들 중 마지막 함수만 또는 제일 처음 함수만 호출하도록 하는 것
+        - 브라우저 창 크기 resize, Ajax 요청이 있는 자동 완성 양식의 키 누르기 구현 시 유용함
+    - Throttle
+        - 이벤트를 일정한 주기마다 발생하도록 하는 기술
+        - Throttle의 설정 시간으로 1ms를 주게되면 해당 이벤트는 1ms 동안 최대 한번만 발생하게 됨
+        - scroll 이벤트 처리시 유용함
+
+# 일급 객체
+    - 변수나 데이터 구조 안에 담을 수 있다.
+    - 파라미터로 전달할 수 있다.
+    - 리턴 값으로 사용할 수 있다.
+
+# 고차 함수
+    - 함수를 인자로 전달받거나 함수를 결과로 반환하는 함수
+    - 인자로 전달받은 함수를 필요한 시점에 호출하거나 클로저를 생성하여 반환한다.
