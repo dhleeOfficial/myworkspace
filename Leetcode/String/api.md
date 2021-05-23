@@ -9,3 +9,6 @@
     const str2 = 'World';
 
     console.log(str1.concat(' ', str2));    // Hello World
+
+## split
+    - String 객체를 지정한 구분자를 이용하여 여러 개의 문자열로 나눈다.

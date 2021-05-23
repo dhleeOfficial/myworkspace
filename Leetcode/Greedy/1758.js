@@ -7,8 +7,10 @@
 
     if (s.length === 1) return operations;
 
-    for (let i = 0; i < s.length; ++i) {
-        console.log(s[i]);
+    let idx = 0;
+
+    while (idx < s.length) {
+        
     }
 };
 

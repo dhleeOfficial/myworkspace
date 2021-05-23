@@ -1,0 +1,47 @@
+html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0 20px;
+    background: #ededed;
+}
+
+h1 {
+    text-align: center;
+    margin: 80px 0;
+}
+
+.mynav ul {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    list-style: none;
+    flex-wrap: wrap;
+    padding: 0;
+}
+
+.mynav li {
+    margin: 0 10px;
+}
+
+.mynav a {
+    display: block;
+    font-size: 20px;
+    color: black;
+    text-decoration: none;
+    padding: 7px 15px;
+}
+
+.target {
+    position: absolute;
+    border-bottom: 4px solid transparent;
+}
+
+.mynav a, .target {
+    -webkit-transition: all .25s ease-in-out;
+    /* transition: all 1s, ease-in-out; */
+}

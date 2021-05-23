@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.slide_wrapper {
+    position: relative;
+    width: 960px;
+    margin: 0 auto;
+    height: 300px;
+    overflow: hidden;
+}
+
+.slides {
+    position: absolute;
+    left: 0;
+    top: 0;
+    list-style: none;
+    width: 3000px;
+}
+
+.slides li:not(:last-child) {
+    float: left;
+    margin-right: 30px;
+}
