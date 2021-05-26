@@ -944,3 +944,5 @@
     - document loaded event
         - 브라우저에 모든 리소스가 로드되었을 때
         - 모든 리소스가 로드된 시점이기에 image 사이즈와 같은 것들을 얻을 수 있다.
+
+# Gabage collector
