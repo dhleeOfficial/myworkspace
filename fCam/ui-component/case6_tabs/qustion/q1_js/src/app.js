@@ -23,3 +23,49 @@ const fetchTabsData = () => {
 };
 
 // Do something!
+document.addEventListener('DOMContentLoaded', async () => {
+  let curTabIdx = 0;
+
+  try {
+    const tabsData = await fetchTabsData();
+    const spinner = document.querySelector('.spinner');
+    const tabs = document.querySelector('.tabs');
+
+    spinner.style.display = 'none';
+    tabs.style.setProperty('--tabs-length', tabsData.length);
+
+    const nav = tabsData.map(({ title }, idx ) => `
+      ${ idx === 0 ? `<nav>` : '' }
+        <div class="tab" data-index=${idx}>${title}</div>
+      ${ idx === tabsData.length - 1 ? `<span class="glider"></span></nav>` : '' }
+      `
+    );
+
+    const content = tabsData.map(({ content }, idx ) => 
+      `<div class="tab-content ${ idx === curTabIdx ? 'active' : '' }">
+        ${content}
+      </div>`
+    );
+
+    tabs.innerHTML = [ ...nav, ...content ].join('');
+
+  } catch (e) {
+    console.error(e);
+  }
+
+  const nav = document.querySelector('nav');
+
+  nav.onclick = (() => {
+    const glider = document.querySelector('.glider');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    return e => {
+      curTabIdx = +e.target.dataset.index;
+      glider.style.transform = `translate3d(${curTabIdx * 100}%, 0, 0)`;
+  
+      tabContents.forEach(( tabContent , idx ) => {
+        tabContent.classList.toggle('active', curTabIdx === idx);
+      });
+    }
+  })();
+});

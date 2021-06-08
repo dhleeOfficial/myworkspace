@@ -1,0 +1,72 @@
+html, body {
+    padding: 0;
+    margin: 0;
+}
+
+.content {
+    width: 100%;
+    height: 300px;
+    text-align: center;
+    display: none;
+}
+
+.content * {
+    color: white;
+}
+
+.content.active {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: .35s ease-in-out;
+}
+
+.tab-container {
+    display: flex;
+    position: relative;
+    background-color: #555;
+}
+
+.btn {
+    background-color: transparent;
+    width: 25%;
+    height: 60px;
+    cursor: pointer;
+    padding: 14px 16px;
+    color: white;
+    font-size: 17px;
+    border: none;
+    transition: .35s ease-in-out;
+    z-index: 10;
+}
+
+.glinder {
+    position: absolute;
+    width: 25%;
+    height: 60px;
+    left: 0;
+    top: 0;
+    /* background-color: orchid; */
+    transition: all 0.25s ease-out;
+}
+/* 
+.btn:hover {
+    background-color: #777;
+} */
+/* 
+#about {
+    background-color: orange;
+}
+
+#products {
+    background-color: orchid;
+}
+
+#tech {
+    background-color: palegoldenrod;
+}
+
+#down {
+    background-color: peru;
+} */
